@@ -1,0 +1,16 @@
+Dynamic Array:
+
+Initial capacity: 1
+Resizing involves doubling the array size.
+Here's the sequence of insertions:
+
+First insertion: No resizing is required. Cost = 1.
+Second insertion: Resizing (doubling the size) is required. Cost = 1 (insert) + 1 (resizing) = 2.
+Third insertion: Resizing (doubling the size) is required. Cost = 1 (insert) + 2 (resizing) = 3.
+Fourth insertion: No resizing is required. Cost = 1.
+Fifth insertion: Resizing (doubling the size) is required. Cost = 1 (insert) + 4 (resizing) = 5.
+Sixth insertion: Resizing (doubling the size) is required. Cost = 1 (insert) + 5 (resizing) = 6.
+Now, let's consider the first six insertions together:
+
+Total cost: 1 (first insertion) + 2 (second insertion) + 3 (third insertion) + 1 (fourth insertion) + 5 (fifth insertion) + 6 (sixth insertion) = 18.
+In this example, the cost of resizing (total 18) is distributed over the first six insertions. The amortized cost per insertion is 18 / 6 = 3. This shows that the average cost of each insertion is still constant, even though resizing is always doubling the array size when it occurs.
