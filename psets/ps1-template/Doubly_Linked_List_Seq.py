@@ -39,13 +39,26 @@ class Doubly_Linked_List_Seq:
         node.item = x
 
     def insert_first(self, x):
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
-        pass
+        
+        #Initialize new node
+        new_node = Doubly_Linked_List_Node(x)
+        
+        # Base Case, empty DoublyLinkedList
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+
+        # Inductive Step, if DoublyLinkedList is not empty
+        else:
+            current_first_node = self.head
+            self.head = new_node
+            current_first_node.prev = new_node
+            new_node.next = current_first_node
+
 
     def insert_last(self, x):
         
+        # Initilalize new node
         new_node = Doubly_Linked_List_Node(x)
 
         # Base Case, empty DoublyLinkedList

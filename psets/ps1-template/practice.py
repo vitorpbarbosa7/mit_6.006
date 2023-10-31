@@ -11,3 +11,7 @@ dll = Doubly_Linked_List_Seq()
 X = [1,2,3]
 
 dll.build(X)
+
+dll.insert_first(9)
+
+print(dll)
