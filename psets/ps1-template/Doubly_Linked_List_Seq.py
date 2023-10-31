@@ -8,6 +8,9 @@ class Doubly_Linked_List_Node:
         if i == 0: return self
         assert self.next
         return self.next.later_node(i - 1)
+    
+    def __repr__(self):
+        return f'{self.item}    '
 
 class Doubly_Linked_List_Seq:
     def __init__(self):
@@ -42,10 +45,22 @@ class Doubly_Linked_List_Seq:
         pass
 
     def insert_last(self, x):
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
-        pass
+        
+        new_node = Doubly_Linked_List_Node(x)
+
+        # Base Case, empty DoublyLinkedList
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        # Inductive Step, if DoublyLinkedList is not empty
+        else:
+            current_last_node = self.tail
+            self.tail = new_node
+            current_last_node.next = new_node
+            new_node.prev = current_last_node
+            
+
+        
 
     def delete_first(self):
         x = None
