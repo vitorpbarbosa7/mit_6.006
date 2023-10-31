@@ -15,31 +15,32 @@ def reorder_students(L:LinkedListSeq):
 
     # breakpoint()
     
-    final_node = _helper_inverse_nodes(node_mid)
-    node_mid.next = None
-    node_mid.next = final_node
+    next_node_mid = node_mid.later_node(1)
+    _helper_inverse_nodes(node_mid, next_node_mid)
+
+    for item in L:
+        print(item)
+    # node_mid.next = None
+    # node_mid.next = final_node
 
 
-def _helper_inverse_nodes(node:LinkedListNode):
+def _helper_inverse_nodes(node_a:LinkedListNode, node_b):
 
     print(f'\nStack frame created')
-    print(node.item)
+    print(node_a.item)
+    print(node_b.item)
     breakpoint()
 
-    if node.next is not None:
-        
-        # next node
-        next2_node = node.later_node(2)
-        next_node = node.later_node(1)
-        
-        # next node points to previous node
-        next2_node.next = next_node
-        
-        _helper_inverse_nodes(next_node)
+    if node_a.next is not None and node_b.next is not None:
 
-    # reached final node
-    if node.next == None:
-        return node
+        next_node = node_b.later_node(1)
+
+        _helper_inverse_nodes(node_b, next_node)
+
+        node_b.next = node_a
+
+    else: 
+        return 
 
 
 reorder_students(L)
