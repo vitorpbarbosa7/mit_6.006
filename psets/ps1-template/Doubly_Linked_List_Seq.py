@@ -103,26 +103,40 @@ class Doubly_Linked_List_Seq:
 
     def remove(self, x1, x2):
         L2 = Doubly_Linked_List_Seq()
+
+        # only mapping, not reassigning anything
+        x1_prev_node = x1.prev
+        x2_next_node = x2.next
         
         # General Case in which the x1 or x2 are not head nor tail
         if x1 != self.head:
 
-            x1_prev_node = x1.prev
             x1.prev = None
 
-            # new list simple assignment
-            L2.head = x1
+            # # new list simple assignment
+            # L2.head = x1
+
+            x1_prev_node.next = x2_next_node
+        else:
+            # Base Case, if it is really the Head
+            self.head = x2_next_node
+            x2_next_node.prev = None
 
         if x2 != self.tail:
-            x2_next_node = x2.next
+            
             x2.next = None
 
-            # new list simple assignment
-            L2.tail = x2
+            # # new list simple assignment
+            # L2.tail = x2
 
-        # Then reattach the 
-        x1_prev_node.next = x2_next_node
-        x2_next_node.prev = x1_prev_node
+            x2_next_node.prev = x1_prev_node
+        else:
+            self.tail = x1_prev_node
+            x1_prev_node.next = None
+
+        # new list simple assignment
+        L2.head = x1
+        L2.tail = x2
 
         return L2
 

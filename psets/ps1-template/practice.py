@@ -44,3 +44,16 @@ print(f'Nodes to be removed are {x1} to {x2}')
 L2 = dll.remove(x1, x2)
 print(f'New DoublyLinkedList from removed nodes: {L2}')
 print(f'Remaining List: {dll}')
+
+# Test remove
+print('# ---------------- #')
+X = [1,2,3,4,5]
+dll = Doubly_Linked_List_Seq()
+dll.build(X)
+print(f'Current List: {dll}')
+x1 = dll.head.later_node(2)
+x2 = dll.head.later_node(4)
+print(f'Nodes to be removed are {x1} to {x2}')
+L2 = dll.remove(x1, x2)
+print(f'New DoublyLinkedList from removed nodes: {L2}')
+print(f'Remaining List: {dll}')
