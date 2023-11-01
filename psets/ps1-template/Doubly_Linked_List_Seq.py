@@ -8,9 +8,6 @@ class Doubly_Linked_List_Node:
         if i == 0: return self
         assert self.next
         return self.next.later_node(i - 1)
-    
-    def __repr__(self):
-        return f'{self.item}    '
 
 class Doubly_Linked_List_Seq:
     def __init__(self):
@@ -74,7 +71,7 @@ class Doubly_Linked_List_Seq:
             
 
     def delete_first(self):
-        x = None
+        x = self.head
         
         # Base Case, if DoublyLinkedList is empty, nothing to do and nothing to return as nothing deleted
         if self.head is None:
@@ -86,10 +83,10 @@ class Doubly_Linked_List_Seq:
             self.head = second_node
             second_node.prev = None
 
-        return x
+        return x.item
 
     def delete_last(self):
-        x = None
+        x = self.tail
         
         if self.tail is None:
             return 
@@ -99,7 +96,7 @@ class Doubly_Linked_List_Seq:
             self.tail = second_last_node
             second_last_node.next = None
 
-        return x
+        return x.item
 
     def remove(self, x1, x2):
         L2 = Doubly_Linked_List_Seq()
@@ -135,6 +132,10 @@ class Doubly_Linked_List_Seq:
         return L2
 
     def splice(self, x, L2):
+        
+        # if L2 does not exist
+        if L2.head is None:
+            return
 
         x_next_node = x.next
         l2_head = L2.head
@@ -144,8 +145,9 @@ class Doubly_Linked_List_Seq:
         x.next = l2_head
         l2_head.prev = x
 
-        # attach last part
-        x_next_node.prev = l2_tail
-        l2_tail.next = x_next_node
+        # if the x was not tail, than x_next_node exists
+        if x_next_node:
+            x_next_node.prev = l2_tail
+            l2_tail.next = x_next_node
 
 
