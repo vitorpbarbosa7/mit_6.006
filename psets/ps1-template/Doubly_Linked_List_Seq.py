@@ -73,27 +73,57 @@ class Doubly_Linked_List_Seq:
             new_node.prev = current_last_node
             
 
-        
-
     def delete_first(self):
         x = None
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
+        
+        # Base Case, if DoublyLinkedList is empty, nothing to do and nothing to return as nothing deleted
+        if self.head is None:
+            return 
+        
+        # Make head pointer point to the second node
+        else:
+            second_node = self.head.next
+            self.head = second_node
+            second_node.prev = None
+
         return x
 
     def delete_last(self):
         x = None
-        ###########################
-        # Part (a): Implement me! #
-        ###########################
+        
+        if self.tail is None:
+            return 
+        
+        else:
+            second_last_node = self.tail.prev
+            self.tail = second_last_node
+            second_last_node.next = None
+
         return x
 
     def remove(self, x1, x2):
         L2 = Doubly_Linked_List_Seq()
-        ###########################
-        # Part (b): Implement me! # 
-        ###########################
+        
+        # General Case in which the x1 or x2 are not head nor tail
+        if x1 != self.head:
+
+            x1_prev_node = x1.prev
+            x1.prev = None
+
+            # new list simple assignment
+            L2.head = x1
+
+        if x2 != self.tail:
+            x2_next_node = x2.next
+            x2.next = None
+
+            # new list simple assignment
+            L2.tail = x2
+
+        # Then reattach the 
+        x1_prev_node.next = x2_next_node
+        x2_next_node.prev = x1_prev_node
+
         return L2
 
     def splice(self, x, L2):
