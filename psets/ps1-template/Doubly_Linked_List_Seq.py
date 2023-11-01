@@ -112,11 +112,8 @@ class Doubly_Linked_List_Seq:
         if x1 != self.head:
 
             x1.prev = None
-
-            # # new list simple assignment
-            # L2.head = x1
-
             x1_prev_node.next = x2_next_node
+
         else:
             # Base Case, if it is really the Head
             self.head = x2_next_node
@@ -125,11 +122,8 @@ class Doubly_Linked_List_Seq:
         if x2 != self.tail:
             
             x2.next = None
-
-            # # new list simple assignment
-            # L2.tail = x2
-
             x2_next_node.prev = x1_prev_node
+
         else:
             self.tail = x1_prev_node
             x1_prev_node.next = None
@@ -141,7 +135,17 @@ class Doubly_Linked_List_Seq:
         return L2
 
     def splice(self, x, L2):
-        ###########################
-        # Part (c): Implement me! # 
-        ###########################
-        pass
+
+        x_next_node = x.next
+        l2_head = L2.head
+        l2_tail = L2.tail
+
+        # attach first part
+        x.next = l2_head
+        l2_head.prev = x
+
+        # attach last part
+        x_next_node.prev = l2_tail
+        l2_tail.next = x_next_node
+
+
