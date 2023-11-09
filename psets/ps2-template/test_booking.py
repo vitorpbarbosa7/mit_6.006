@@ -1,43 +1,95 @@
-
-
-
-B1 = [(2,2,3)]
-B2 = [(1,0,4)]
-
+#B1 = [(2,2,3),(1,3,4)]
+#B2 = [(1,0,4),(2,4,6)]
 
 cont = 0
 
-i = 0
 j = 0
+i = j + 1
+
+Bs = [(1,0,4),(2,2,3),(1,3,4),(2,4,6)]
+
+rooms_i = Bs[i][0]
+rooms_j = Bs[j][0]
+
+marker_i = Bs[i][1]
+marker_j = Bs[j][1]
+
+rooms = 0
 
 B = []
-while i < len(B1) and j < len(B2): 
 
-	rooms_i = B1[i][0]
-	rooms_j = B2[j][0]
+def _move_tuple(k, marker, rooms):
+	print('initial k: ', k)
 	
-	start_i = B1[i][1]
-	start_j = B2[j][1]
-	
-	end_i = B1[i][2]
-	end_j = B1[j][2]
-	
-	if start_j < start_i:
-		start_time = start_j
-		# finalizar um para abrir outro
-		end = start_i
-		
-		rooms = rooms_j
-		i += 1
+	if marker == Bs[k][1]:
+		# update marker because it is still possible
+		marker = Bs[k][2]
 	else:
-		start_time = start_i
-		end = start_j
-		rooms = rooms_i
+		#moving marker inside tuple is not possible anymore, so move it to next element
+		rooms -= Bs[k][0]
+		k +=1
+		marker = Bs[k][1]
 
-	if end_j > end_i:
-		i += 1
-		rooms +=
+	print('final k: ', k)
+
+	return k, marker, rooms
+
+# Base case
+if marker_j < marker_i:
+	start_time = marker_j
+	# finalizar um para abrir outro
+	end = marker_i
+	rooms += rooms_j
+	j, marker_j, rooms = _move_tuple(j, marker_j, rooms)
+	i, marker_i, rooms = _move_tuple(i, marker_i, rooms)
+
+elif marker_i < marker_j:		
+
+	start_time = marker_i
+
+	end = marker_j
+	rooms += rooms_i
+	i, marker_i, rooms = _move_tuple(i, marker_i, rooms)
+	j, marker_j, rooms = _move_tuple(j, marker_j, rooms)
 	
+	
+new_element = (rooms, start_time, end)
+print(new_element)
+B.append(new_element)
+print(B)
+
+print('marker i ', i, marker_i)
+print('marker j ', j, marker_j)
+breakpoint()
+
+start_time = end
+
+
+while i < len(Bs): 
+
+	if marker_i < marker_j:
+		end = marker_i
+		i, marker_i, rooms = _move_tuple(i, marker_i, rooms)
+		rooms = 'A'
+
+	elif marker_i > marker_j:
+		end = marker_j
+		j, marker_j, rooms = _move_tuple(j, marker_j, rooms)
+		rooms = 'A'
+
 	new_element = (rooms, start_time, end)
-	print(new_element)
 	B.append(new_element)
+
+	start_time = end
+
+	print(B)
+	print('marker i ', i, marker_i)
+	print('marker j ', j, marker_j)
+	print('new start_time: ', start_time)
+	breakpoint()
+
+	
+	
+
+
+
