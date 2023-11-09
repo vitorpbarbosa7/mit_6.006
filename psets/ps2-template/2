@@ -1,0 +1,27 @@
+
+
+
+B1 = [(2,2,3)]
+B2 = [(1,0,4)]
+
+
+cont = 0
+
+i = 0
+j = 0
+
+rooms_i = B1[i][0]
+rooms_j = B2[j][0]
+
+
+start_i = B1[i][1]
+start_j = B2[j][1]
+
+end_i = B1[i][2]
+end_j = B1[j][2]
+
+
+
+print(rooms_i)
+print(start_i)
+print(end_i)
