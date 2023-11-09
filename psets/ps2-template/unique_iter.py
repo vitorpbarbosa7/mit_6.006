@@ -38,10 +38,9 @@ while i < len(B1) and j < len(B2):
         start = start_i
         end = start_j
 
-        start = start_i
-        end = start_j
 
-    
+
+
     if finished_i:
         i += 1
     
