@@ -1,6 +1,6 @@
 import unittest
 from satisfying_booking     import satisfying_booking
-
+ 
 tests = (
     (
         ((2, 19), (17, 18), (12, 25), (5, 15), (9, 11)),

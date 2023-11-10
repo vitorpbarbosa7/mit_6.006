@@ -1,4 +1,7 @@
 
+B1 = [(1,0,4), (2,4,5),(1,5,6)]
+B2 = [(2,2,3), (1,3,4), (2,6,6)]
+
 def merge_bookings(B1, B2):
 
     if isinstance(B1[0][0], tuple):
@@ -73,33 +76,10 @@ def merge_bookings(B1, B2):
     
     return B_
 
-def satisfying_booking(R):
-    '''
-    Input:  R | Tuple of |R| talk request tuples (s, t)
-    Output: B | Tuple of room booking triples (k, s, t)
-              | that is the booking schedule that satisfies R
-    '''
-    print(f'Stack frame created')
 
-    # Base case, single Booking is already sorted
-    if len(R) == 1:
-        return (1, R[0][0], R[0][1])
+if __name__ == '__main__':
+    B = merge_bookings(B1, B2)
+    print('\n', B)
 
-    n = len(R)
-    mid = n//2
-    left = R[0:mid]
-    right = R[mid:] 
 
-    print(f'left before recursion: {left}')
-    print(f'right before recursion: {right}')
 
-    left = satisfying_booking(left)
-    right = satisfying_booking(right)
-
-    print(f'left after recursion: {left}')
-    print(f'right after recursion: {right}')
-    #breakpoint()
-
-    merged = merge_bookings([left], [right])
-    
-    return tuple(merged)

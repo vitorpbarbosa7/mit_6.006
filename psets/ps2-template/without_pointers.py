@@ -42,7 +42,7 @@ def fill_array(Bi):
     i = 0 
     for single in Bi:
 
-        print(single)
+        # print(single)
         start = single[1]
         end = single[2]
         rooms = single[0]
@@ -60,34 +60,29 @@ fill_array(B2)
 print(B)
 
 
-# Bf = []
+Bf = []
 
-# helper_array = [x for x in range(0, len(B)+1)]
+helper_array = [x for x in range(0, len(B)+1)]
 # print(helper_array)
 
+start = helper_array[0]
 
-# start = helper_array[0]
+i = 0
+j = 0
 
-# def _count_equal(B, i):
+start = B[j]
+while i < len(helper_array):
 
-#     cont = 0
-#     k = i
+    while B[j] == B[j+1]:
+        i += 1
+        j += 1 
 
-#     while B[k] == B[k+1]:
-#         cont += 1
-#         k += 1
+    tup = (B[j+1], start, i+1)
+    print(tup)
 
-#     return cont
+    i += 1
+    j += 1
 
-# i = 0
-# while i < len(helper_array):
+
     
-#     sum_index = _count_equal(B, i)
-#     end = i + sum_index
 
-#     tup = (B[i], start, end)
-#     print(tup)
-
-#     start = end
-
-#     i += 1
