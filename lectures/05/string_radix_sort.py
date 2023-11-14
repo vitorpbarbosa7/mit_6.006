@@ -17,6 +17,12 @@ class Obj:
         self.key = None
 
 def counting_sort(A): # A: List[Obj]
+
+    # Recitation 05: exercise 3 describe algorithm
+    # raiseNotImplemented
+    # Create another array filling with the converted string to decimals
+    # B.keys = ... converted keys
+    # B.original_item = ... strings
  
     # O(n) find maximum key of A
     u = 1 + max([x.key for x in A]) 
@@ -77,18 +83,3 @@ def radix_sort(A): # A: List[Obj]
         A[i] = D[i].item
 
     return A
-    
-# Example usage
-elements = [17,3,24,22,12] 
-A = [E(x) for x in elements]
-
-print('Unsorted: ', [x.key for x in A])
-
-Asorted = radix_sort(A)
-
-print('Sorted:', [x.key for x in Asorted])
-
-
-        
-
-
