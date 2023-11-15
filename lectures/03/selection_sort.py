@@ -1,6 +1,3 @@
-
-
-
 def prefix_max(A, i):
 
 	if i > 0:
