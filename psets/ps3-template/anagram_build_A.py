@@ -2,8 +2,12 @@ class Anagram:
     
     def __init__(self):
         self.hashmap = None
+        self.A = None
+        self.Bs = None
+        self.k = None
     
-    def build(self, A):
+    def build(self, A, Bs):
+        self.k = len(Bs[0])
         self.hashmap = {key: 0 for key in A}
         self.string_sequence = [character for character in A]
 
