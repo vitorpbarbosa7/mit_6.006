@@ -27,7 +27,7 @@ def count_anagram_substrings(T, S):
 
         # this does not run in O(n) because we have a fixed amount of letters in the ascii lower case english ALPHABET (26)
         # so this is constant time
-        mykey = int(''.join(map(str, characters.values())))
+        mykey = int(''.join(map(str, characters.values())))     
         DAA[mykey] = 1
 
         for i in range(k, n):
@@ -45,6 +45,9 @@ def count_anagram_substrings(T, S):
 
                 # this does not run in O(n) because we have a fixed amount of letters in the ascii lower case english ALPHABET (26)
                 # so this is constant time
+
+                # now, how to implement this, without this string contatenation?
+                
                 mykey = int(''.join(map(str, characters.values())))
                 if mykey not in DAA:
                         DAA[mykey] = 1
@@ -89,7 +92,7 @@ if __name__ == '__main__':
         'kkkkkvvuvkvkkkvuuvkuukkuvvkukkvkkvuvukuk', 
         'trhtrthtrthhhrtthrtrhhhtrrrhhrthrrrttrrttrthhrrrrtrtthhhhrrrtrtthrttthrthhthrhrh',
         'hjjijjhhhihhjjhjjhijjihjjihijiiihhihjjjihjjiijjijjhhjijjiijhjihiijjiiiijhihihhiihhiiihhiijhhhiijhijj'
-                ]
+        ]
 
         Ss = [
         ('tesla',),
@@ -97,7 +100,7 @@ if __name__ == '__main__':
         ('vkuk', 'uvku', 'kukk'),
         ('rrrht', 'tttrr', 'rttrr', 'rhrrr'),
         ('jihjhj', 'hhjiii', 'ihjhhh', 'jjjiji'),
-]
+        ]
         
         all_results = []
         for i in range(len(Ts)):
