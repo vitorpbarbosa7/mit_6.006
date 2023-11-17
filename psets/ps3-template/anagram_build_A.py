@@ -5,6 +5,13 @@ class Anagram:
     
     def build(self, A):
         self.hashmap = {key: 0 for key in A}
+        self.string_sequence = [character for character in A]
+
+    def substring_count(self, B):
+        pass
+
+    def _directaccessarray(self):
+        DAA = 
 
 
 if __name__ == '__main__':
