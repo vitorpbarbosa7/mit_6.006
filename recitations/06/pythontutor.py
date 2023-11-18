@@ -132,10 +132,16 @@ class Bnode:
 
 tree = Bnode('A')
 
-tree.subtree_insert_before(Bnode('F'))
-tree.subtree_insert_before(Bnode('D'))
+# tree.subtree_insert_before(Bnode('F'))
+# tree.subtree_insert_before(Bnode('D'))
+# tree.subtree_insert_before(Bnode('B'))
+# tree.subtree_insert_before(Bnode('E'))
+# tree.subtree_insert_after(Bnode('C'))
+
 tree.subtree_insert_before(Bnode('B'))
-tree.subtree_insert_before(Bnode('E'))
+tree.left.subtree_insert_before(Bnode('D'))
+tree.left.subtree_insert_after(Bnode('E'))
+tree.left.left.subtree_insert_before(Bnode('F'))
 tree.subtree_insert_after(Bnode('C'))
 
 first = tree.subtree_first()
