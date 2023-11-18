@@ -1,13 +1,28 @@
 from binarytreejoinsubroutines import BinaryNode
 
 tree = BinaryNode('A')
-print(tree.item)
 
-tree.subtree_insert_before(BinaryNode('F'))
-tree.subtree_insert_before(BinaryNode('D'))
 tree.subtree_insert_before(BinaryNode('B'))
-tree.subtree_insert_before(BinaryNode('E'))
+tree.left.subtree_insert_before(BinaryNode('D'))
+tree.left.subtree_insert_after(BinaryNode('E'))
+tree.left.left.subtree_insert_before(BinaryNode('F'))
 tree.subtree_insert_after(BinaryNode('C'))
 
+print('1 - full tree')
 print(tree)
-print(tree.item)
+
+print('\nsubtree first')
+first = tree.subtree_first()
+print(first)
+
+print('\nsubtree last')
+last = tree.subtree_last()
+print(last)
+
+print('\nPredecessor of tree')
+predecessor = tree.predecessor()
+print(predecessor)
+
+print('\nSuccessor of tree')
+successor = tree.successor()
+print(successor)
