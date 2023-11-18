@@ -31,7 +31,10 @@ def count_anagram_substrings(T, S):
 
         # this does not run in O(n) because we have a fixed amount of letters in the ascii lower case english ALPHABET (26)
         # so this is constant time
-        mykey = characters
+
+        # tuples are hashable
+        # page 82 from "Introduction to computation and programming using python - mit press"
+        mykey = tuple(characters)
         DAA[mykey] = 1
 
         for i in range(k, n):
@@ -49,7 +52,7 @@ def count_anagram_substrings(T, S):
                 ch_position = lower_ord(new_ch)
                 characters[ch_position] += 1
                 
-                mykey = characters
+                mykey = tuple(characters)
                 if mykey not in DAA:
                         DAA[mykey] = 1
                 else:
@@ -68,7 +71,7 @@ def count_anagram_substrings(T, S):
                         ch_position = lower_ord(ch)
                         characters[ch_position] += 1
 
-                Bkey = characters
+                Bkey = tuple(characters)
 
                 if Bkey in DAA:
                         return DAA[Bkey]
