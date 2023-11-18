@@ -1,5 +1,5 @@
 import unittest
-from count_anagram_substrings   import count_anagram_substrings
+from count_anagram_substrings2   import count_anagram_substrings
 
 tests = (
     (

@@ -112,7 +112,7 @@ def count_anagram_substrings(T, S):
         k = len(S[0])
         print(k)
         print('\n')
-        breakpoint()
+        # breakpoint()
 
         DAA = {}
 
@@ -136,7 +136,7 @@ def count_anagram_substrings(T, S):
 
         print(DAA)
         print('\n')
-        breakpoint()
+        # breakpoint()
 
         def count(DAA, B):
 
@@ -152,7 +152,7 @@ def count_anagram_substrings(T, S):
                 A.append(count(DAA, B))        
                 print(A)
                 print('\n')
-                breakpoint()
+                # breakpoint()
 
         return tuple(A)
 
@@ -184,7 +184,7 @@ if __name__ == '__main__':
                 print(T)
                 print(S)
                 print('\n')
-                breakpoint()
+                # breakpoint()
 
                 A = count_anagram_substrings(T, S)
                 all_results.append(A)
