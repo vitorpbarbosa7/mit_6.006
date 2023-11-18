@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\begin{document}
+
+\title{Tree Diagram}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section{Tree Diagram}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  every node/.style={circle, draw, minimum size=1.5em},
+  level/.style={sibling distance=30mm/#1},
+  level distance=20mm
+]
+
+\node {A}
+  child {node {B}
+    child {node {D}
+      child {node {F}}
+    }
+    child {node {E}}
+  }
+  child {node {C}};
+
+\end{tikzpicture}
+\caption{Tree}
+\end{figure}
+
+\end{document}
