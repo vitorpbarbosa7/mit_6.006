@@ -1,7 +1,8 @@
+from elementkey import E
 from binarytreeclass import BinaryTree
 from bstnode import BSTNode
 
-class SetBinaryTree(BSTNode):
+class SBTree(BinaryTree):
 
     def __init__(self):
         super().__init__(BSTNode)
@@ -10,7 +11,7 @@ class SetBinaryTree(BSTNode):
         yield from self
 
     def build(self, X):
-        for x in X: self.subtree_insert(x)
+        for x in X: self.insert(x)
 
     def find_min(self):
         if self.root: return self.root.subtree_first().item
@@ -32,7 +33,7 @@ class SetBinaryTree(BSTNode):
             
     def find_prev(self, k):
         if self.root:
-            node = node.root.subtree_find_prev()
+            node = self.root.subtree_find_prev(k)
             if node:
                 return node.item
             
@@ -41,16 +42,15 @@ class SetBinaryTree(BSTNode):
         if self.root:
             self.root.subtree_insert(new_node)
 
-            # ???
             if new_node.parent is None:
                 return False
             
             # if the new node has no parent node, it is the root
             # set the root of the tree to the new node
-            else:
-                self.root = new_node
-            self.size += 1
-            return True
+        else:
+            self.root = new_node
+        self.size += 1
+        return True
         
     def delete(self, k):
         assert self.root
@@ -66,19 +66,39 @@ class SetBinaryTree(BSTNode):
             self.root = None
 
         self.size -= 1
+
         return ext.item
-    
-class E:
-    def __init__(self, key):
-        self.key = key
 
 # Example Usage
-elements = ['F','D','B','E','A','C']
 
-items = [BSTNode(E(el)) for el in elements]
-print(items)
+if __name__ == '__main__':
+    elements = ['F','D','B','E','A','C']
 
-setbinarytree = SetBinaryTree()
-setbinarytree.build(items)
-print(setbinarytree)
+    # items = [E(el) for el in elements]
+    items = elements
+    # print(items)
+
+    sbtree = SBTree()
+    sbtree.build(items)
+    print(sbtree)
+    _min = sbtree.find_min()
+    _max = sbtree.find_max()
+    _find = sbtree.find('D')
+    print(_min)
+    print(_max)
+    print(_find)
+
+    print('\n')
+    find_next = sbtree.find_next('A')
+    find_prev = sbtree.find_prev('A')
+    print(find_next)
+    print(find_prev)
+    
+    print('\n')
+    sbtree.insert('J')
+    print(sbtree)
+
+    print('n')
+    sbtree.delete('C')
+    print(sbtree)
 

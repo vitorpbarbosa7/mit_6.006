@@ -1,9 +1,10 @@
 from typing import Type, Optional
+from elementkey import E
 
 class BinaryNode:
 
     def __init__(A, x):
-        A.item = x
+        A.item = E(x)
         A.left: Optional[BinaryNode] = None
         A.right: Optional[BinaryNode] = None
         A.parent: Optional[BinaryNode] = None
@@ -134,9 +135,11 @@ class BinaryNode:
         # if did entered the first case, and has a parent, it is a leaf
         if A.parent:
 
-            # just check if either is left or right child (--politics--)
-            if A.parent.left:
+            # check if A is left child of parent, if it is deleting is setting the A.parent.left = None
+            if A.parent.left is A:
                 A.parent.left = None
+
+            # else it was the right node, so set the parent here to None
             else:
                 A.parent.right = None
             

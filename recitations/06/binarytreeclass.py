@@ -1,8 +1,9 @@
+from typing import Optional
 from binarytreejoinsubroutines import BinaryNode
 
 class BinaryTree(BinaryNode):
     def __init__(T, NodeType = BinaryNode):
-        T.root = None
+        T.root: Optional[BinaryNode] = None
         T.size = 0
         T.NodeType = NodeType
 

@@ -48,6 +48,8 @@ class BSTNode(BinaryNode):
         return A
     
     def subtree_insert(A, B:BinaryNode):
+        '''Method responsible for inserting items in the set interface, in key order'''
+
         # left case insert befores
         if B.item.key < A.item.key:
             if A.left:
