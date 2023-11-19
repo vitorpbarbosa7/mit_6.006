@@ -1,6 +1,6 @@
 from binarytreejoinsubroutines import BinaryNode
 
-class BinaryTree:
+class BinaryTree(BinaryNode):
     def __init__(T, NodeType = BinaryNode):
         T.root = None
         T.size = 0
@@ -15,6 +15,9 @@ class BinaryTree:
             for A in T.root.subtree_iter():
                 yield A.item
 
+    def __repr__(T):
+        return ' -> '.join(str(node) for node in T)
+
 # Example usage:
 if __name__ == '__main__':
     tree = BinaryNode('A')
@@ -27,5 +30,6 @@ if __name__ == '__main__':
 
     btree = BinaryTree()
     btree.root = tree
-    print(btree.root)
+    # print(btree.root)
+    print(btree)
 

@@ -1,10 +1,12 @@
+from typing import Type, Optional
+
 class BinaryNode:
 
     def __init__(A, x):
         A.item = x
-        A.left = None
-        A.right = None
-        A.parent = None
+        A.left: Optional[BinaryNode] = None
+        A.right: Optional[BinaryNode] = None
+        A.parent: Optional[BinaryNode] = None
 
     def subtree_iter(A):
     # every node in the left subtree of node <x> comes before <x> in the traversal order
@@ -18,8 +20,11 @@ class BinaryNode:
         if A.right: 
             yield from A.right.subtree_iter()
 
+    # def __repr__(A):
+    #     return ' -> '.join(str(node.item) for node in A.subtree_iter())
+
     def __repr__(A):
-        return ' -> '.join(str(node.item) for node in A.subtree_iter())
+        return str(A.item)
  
     def subtree_first(A):
         '''Traversing left, as in the traversal order, left comes first'''

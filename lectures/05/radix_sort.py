@@ -4,8 +4,7 @@ class E:
     def __init__(self, key):
         self.key = key
 
-        
-class Obj:
+    
     def __init__(self):
 
         # The digits that will serve for the tuple sort part

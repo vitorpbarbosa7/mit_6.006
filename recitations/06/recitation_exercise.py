@@ -35,46 +35,27 @@ class BNode:
         else:
             return A
         
-
-    
-
     def successor(A):
-        
-        
-        
         
         if A.right:
             return A.right.subtree_first()
         
-        
-        
-            
-            
-            
         while A.parent and (A is A.parent.right):
             A = A.parent
         return A.parent
 
 
     def predecessor(A):
-        
-        
-        
+
         if A.left:
             return A.left.subtree_last()
-        
-        
-        
-        
-        
+
         while A.parent and(A is A.parent.left):
             A = A.parent
         return A.parent
 
     def subtree_insert_before(A, B):
-        
-        
-        
+
         if A.left:
             A = A.left.subtree_last()
             A.right = B
@@ -85,7 +66,6 @@ class BNode:
             B.parent = A
 
     def subtree_insert_after(A, B):
-        
         
         if A.right:
             A = A.right.subtree_first()
@@ -99,28 +79,21 @@ class BNode:
 
     def subtree_delete(A):
 
-        
-        
         if A.left or A.right:
 
-            
-            
             if A.left: 
                 B = A.predecessor()
 
-            
             else:
                 B = A.successor()
             
             B.item, A.item = A.item, B.item
 
-                
             return B.subtree_delete(A)
         
         
         if A.parent:
 
-            
             if A.parent.left:
                 A.parent.left = None
             else:
@@ -129,22 +102,54 @@ class BNode:
             return A
 
 
+items = [1,2,3,4,5,6]
+# items = [1,2,3]
 
-tree = BNode('A')
+def insert_inordertraversal(items):
 
-# tree.subtree_insert_before(BNode('F'))
-# tree.subtree_insert_before(BNode('D'))
-# tree.subtree_insert_before(BNode('B'))
-# tree.subtree_insert_before(BNode('E'))
-# tree.subtree_insert_after(BNode('C'))
+    n = len(items)
+    mid = n // 2
 
-tree.subtree_insert_before(BNode('B'))
-tree.left.subtree_insert_before(BNode('D'))
-tree.left.subtree_insert_after(BNode('E'))
-tree.left.left.subtree_insert_before(BNode('F'))
-tree.subtree_insert_after(BNode('C'))
+    # Divide
+    left = items[:mid]
+    root_subtree = items[mid]
+    right = items[(mid+1):]
+    
+    tree = BNode(root_subtree)
 
-first = tree.subtree_first()
+    if len(left) > 1:
+        left = insert_inordertraversal(left)
+    elif len(left) == 1:
+        left = left[0]
+    else:
+        left = None
+    
+    if len(right) > 1:
+        right = insert_inordertraversal(right)
+    elif len(right) == 1:
+        right = right[0]
+    else: 
+        right = None
+
+    if isinstance(left, BNode):
+        tree.left = left
+    else:
+        tree.subtree_insert_before(BNode(left))
+
+    # Conquer
+    if isinstance(right, BNode):
+        tree.right = right
+    else:
+        tree.subtree_insert_after(BNode(right))
+
+    return tree
+
+
+tree = insert_inordertraversal(items)
+
+
+
+    
 
 
 
