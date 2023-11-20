@@ -57,7 +57,7 @@ class BinaryNode:
         
         # while the parent of A exists and 
         # if it was left of parent, then the parent is the successor, that's why put the condition 
-            # A.parent.right, because if it is right, must continue going up, until where we are is left node of parent, and that parent will be the successor
+            # A.parent.right, because if it is right, must continue going up, until the node we reach is left node of parent and not right node of parent
             # that is why we return the A.parent in which we're
             # see that we update the A at each step, going up in the tree
         while A.parent and (A is A.parent.right):
@@ -76,7 +76,7 @@ class BinaryNode:
         # The predecessor will be found by going up in the tree, and if it is the right child of parent, that parent is the predecessor
         
         # if not, we must continue going up until the parent has the A as right child, so the parent will the predecessor 
-        while A.parent and(A is A.parent.left):
+        while A.parent and (A is A.parent.left):
             A = A.parent
         return A.parent
 

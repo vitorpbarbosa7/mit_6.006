@@ -48,7 +48,10 @@ class BSTNode(BinaryNode):
         return A
     
     def subtree_insert(A, B:BinaryNode):
-        '''Method responsible for inserting items in the set interface, in key order'''
+        '''Method responsible for inserting items in 
+        the set interface, in key order, therefore it uses the logic 
+        of binary search, that's why when buildint the set interface using 
+        the data structure binary tree, it will take O(nlogn)'''
 
         # left case insert befores
         if B.item.key < A.item.key:
