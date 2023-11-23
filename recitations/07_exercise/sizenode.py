@@ -27,7 +27,7 @@ class SizeNode(BinaryNode):
         else: 
              L_size = 0
     	
-        # with this condition we go left or right
+        # with this condition we go left
         if i < L_size:
     		# recursively go left first and decide what to do after with the next subtree with the recursion
             return A.left.subtree_at(i)
@@ -37,6 +37,26 @@ class SizeNode(BinaryNode):
         
         else:
             return A
+    
+    def subtree_count_ones_upto(A, i):
+
+        def _subtree_count_ones_upto(A, i):
+            assert 0 <= i < A.size
+            out = 0
+            if A.left:
+                if i < A.left.size:
+                    return _subtree_count_ones_upto(A.left, i)
+                # sumup all to the left, then decrease the index, because it must go only furthuer enough in the right subtree as is needed as the left was already summed
+                out += A.left.subtree_ones
+                i -= A.left.size
+            out += A.item 
+            if i > 0:
+                assert A.right 
+                out += _subtree_count_ones_upto(A.right, i -1) 
+            return out
+
+        out = _subtree_count_ones_upto(A, i)
+        return out
 		
 # Example Usage
 if __name__ == '__main__':
