@@ -56,6 +56,7 @@ if __name__ == '__main__':
     # don't care about the order, the h must be logn 
     print(tree.height)
     print(tree.size)
+    print(tree.min)
 
 
     elements = [tree.subtree_at(x) for x in range(tree.size)]

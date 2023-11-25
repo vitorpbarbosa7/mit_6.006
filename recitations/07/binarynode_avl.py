@@ -3,7 +3,14 @@ def height(A):
          return A.height
     else:
         return -1
-        
+    
+def _get_min(A):
+    # if exists, because it might not exist
+    if A:
+        return A.min
+    else:
+        return None
+
 class BinaryNode:
     # O(1) - initialize takes constant time
     def __init__(A, x):
@@ -26,6 +33,20 @@ class BinaryNode:
     def subtree_update(A):
         # Every time we do something, update the augmentation properties
         A.height = 1 + max(height(A.left), height(A.right))
+
+        # find_min augmentation:
+        # think about the min of the subtree in the left and in the right
+        left_min = _get_min(A.left)
+        right_min = _get_min(A.right)
+
+        if left_min is None and right_min:
+            A.min = min(A.item, right_min)
+        elif right_min is None and left_min:
+            A.min = min(A.item, left_min)
+        elif right_min and left_min:
+            A.min = min(A.item, left_min, right_min)
+        else:
+            A.min = A.item
 
     # O(1) - if height is a property, them this will run in constant time 
     def skew(A):
@@ -117,7 +138,12 @@ class BinaryNode:
         
         # return the deleted node object
         return A
-
+    
+    '''
+    All those A, B, C and E new variables, are the necessary variables to execute the rotation of the tree
+    
+    that is why the AVL Sort algorihtm is not an inplace algorithm as the Heap Sort will be (using tree and array ?)
+    '''
     # O(1) : rotation takes constant time 
     def subtree_rotate_right(D):
         # wether there is no a left of D 
@@ -211,3 +237,4 @@ if __name__ == '__main__':
     tree.subtree_insert_after(BinaryNode('C'))
  
     print(tree)
+    print(tree.min)

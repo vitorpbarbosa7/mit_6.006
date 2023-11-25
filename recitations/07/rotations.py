@@ -1,3 +1,11 @@
+
+'''
+All those A, B, C and E new variables, are the necessary variables to execute the rotation of the tree
+
+that is why the AVL Sort algorihtm is not an inplace algorithm as the Heap Sort will be (using tree and array ?)
+
+So we're not using only n slots of memory, we're needing more slots
+'''
 def subtree_rotate_right(D):
     # wether there is no a left of D 
     # D left must exist in order to rotate right the D and make the B (D.left) go up

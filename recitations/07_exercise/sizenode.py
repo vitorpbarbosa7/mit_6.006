@@ -2,7 +2,9 @@ from binarynode_avl import BinaryNode
 
 class SizeNode(BinaryNode):
 
-    '''Need to implement a node which has a size as a augmentated property'''
+    '''Need to implement a node which has a size as a augmentated property
+    This size is what allows us for doing the Sequence AVL Binary Tree
+    Since by using the size we will be able to move around in the tree, using sizes as indexes '''
     
     def subtree_update(A):
         super().subtree_update()
@@ -39,6 +41,8 @@ class SizeNode(BinaryNode):
             return A
     
     def subtree_count_ones_upto(A, i):
+        '''In a sequence interface, be able to count how many ones up to some part in the tree
+        The subtree_ones augmentation is present with the BinaryNode class from which this SizeNode class inherits'''
 
         def _subtree_count_ones_upto(A, i):
             assert 0 <= i < A.size

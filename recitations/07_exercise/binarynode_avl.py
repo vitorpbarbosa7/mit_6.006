@@ -24,10 +24,21 @@ class BinaryNode:
 
     # O(1) - with augmentation height
     def subtree_update(A):
+        '''
+        A.height
+        A.subtree_ones (can be subtree sum of items if not only storing 0 and 1s)
+        '''
+
+        # in this subtree augmentations properties, the recursion and the augmentation itself is allowed by
+        # calling the left and right subtrees
+        # think about applying from bottom up in the tree 
+
         # Every time we do something, update the augmentation properties
         A.height = 1 + max(height(A.left), height(A.right))
 
+        # another property for subtree augmentation
         A.subtree_ones = A.item
+
         if A.left:
             A.subtree_ones += A.left.subtree_ones
 
