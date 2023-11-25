@@ -11,19 +11,21 @@ class PQSortedArray(PriorityQueue):
     def insert(self, *args):
         super().insert(*args)
 
-        i, A = len(self.A) - 2, self.A
+        i, A = len(self.A) - 1, self.A
         
-        while i > 0 and A[i].key > A[i + 1].key:
+        while i > 0 and A[i - 1].key > A[i].key:
             # swap them, because the previous element is bigger than the next element 
-            A[i + 1], A[i] = A[i], A[i + 1]
+            A[i - 1], A[i] = A[i], A[i - 1]
             i -= 1
+
+            # breakpoint()
 
 
 # Example Usage
 
 if __name__ == '__main__':
 
-    X = [4,6,2,4,7,8,1,6,7]
+    X = [4,2,7,6,8,1,2,3,1,5,78,5,2]
     elements = [E(x) for x in X]
 
     sorted = PQSortedArray().sort(elements)

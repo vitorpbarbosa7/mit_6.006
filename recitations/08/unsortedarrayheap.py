@@ -23,7 +23,7 @@ class PQArray(PriorityQueue):
 
         for i in range(n+1):
             print(f'm and i: {A[m].key, A[i].key}')
-            breakpoint()
+            # breakpoint()
             if A[i].key > A[m].key:
                 m = i
 
@@ -42,8 +42,9 @@ class PQArray(PriorityQueue):
 
 if __name__ == '__main__':
 
-    X = [4,2,7,6,8,1]
+    X = [4,2,7,6,8,1,2,3,1,5,78,5,2]
     elements = [E(x) for x in X]
 
-    sorted = PQArray().sort(elements)
-    print(sorted)
+    sortede = PQArray().sort(elements)
+    print(sortede)
+    print(sorted(X))
