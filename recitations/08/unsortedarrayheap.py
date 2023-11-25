@@ -1,4 +1,4 @@
-from base_methods import PriorityQueue
+from priorityqueueinterface import PriorityQueue
 from elementkey import E
 
 class PQArray(PriorityQueue):

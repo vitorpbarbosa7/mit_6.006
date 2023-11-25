@@ -1,5 +1,5 @@
 from elementkey import E
-from base_methods import PriorityQueue
+from priorityqueueinterface import PriorityQueue
 
 class PQSortedArray(PriorityQueue):
     # in this case, for a Sorted Dynamic Array, the delete_max is already correct
