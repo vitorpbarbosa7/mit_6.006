@@ -50,7 +50,7 @@ class PQHeap(PriorityQueue):
 
 if __name__ == '__main__':
 
-    X = [8, 1, 3, 9, 6, 7, 4, 5]
+    X = [7,3,5,6,2,0,3,1]
     elements = [E(x) for x in X]
 
     sorted = PQHeap.sort(elements)

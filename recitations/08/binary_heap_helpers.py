@@ -45,14 +45,14 @@ def max_heapify_up(A, n, child):
         max_heapify_up(A, n, _parent)
 
 def max_heapify_down(A, n, _parent):
-    print(f'\n heapify down')
-    print(A)
+    # print(f'\n heapify down')
+    # print(A)
 
     _left, _right = left(_parent, n), right(_parent, n)
     child = _left if A[_left].key > A[_right].key else _right
 
     if A[child].key > A[_parent].key:
-        print(f'Swap: {A[_parent]} and {A[child]}')
+        # print(f'Swap: {A[_parent]} and {A[child]}')
         # breakpoint()
         A[_parent], A[child] = A[child], A[_parent]
 
@@ -74,3 +74,7 @@ def build_max_heap(A):
     n = len(A)
     for i in range(n //2, -1, -1):
         max_heapify_down(A, n, i)
+
+    print(A)
+
+    return A
