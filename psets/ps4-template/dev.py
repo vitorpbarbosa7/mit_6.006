@@ -10,18 +10,20 @@ class Key_Val_Item:
 
 class Part_B_Node(BST_Node):
     def subtree_update(A):
-        super().subtree_update()
+        super().subtree_update()                
 
-        # Aumentation
-        A.max_key = A.item.key
+        # Augmentation
+        # Manter sempre a soma até aquele elemento da direita
+        A.sum = A.item.val
 
-        # Calcular a maior chave, considerando na direita a chave é maior
         if A.left:
-            A.max_key = max(A.max_key, A.left.max_key)
+            A.sum += A.left.sum
+            A.max_key = A.item.key
 
         if A.right:
-            A.max_key = max(A.max_key, A.right.max_key)
-
+            A.sum += A.right.sum
+            # se estamos pegando somas da direita, a maxima chave passa a ser o da direita
+            A.max_key = A.right.item.key
 
         # Recursive function to call augmentation
 
