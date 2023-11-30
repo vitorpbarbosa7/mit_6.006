@@ -20,10 +20,12 @@ class TemperatureDBNode(BSTNode):
         A.max_temp = A.item.temp
         A.min_date = A.max_date = A.item.key
 
+        # calculated max_temp from left
         if A.left:
             A.min_date = A.left.min_date
             A.max_temp = max(A.max_temp, A.left.max_temp)
-        
+
+       # calculated max_temp from left (already calculated) and from right 
         if A.right:
             A.max_date = A.right.max_date
             A.max_temp = max(A.max_temp, A.right.max_temp)
