@@ -22,16 +22,34 @@ class Part_B_Node(BST_Node):
 
         A.sum = A.item.val
 
-    def cv(A):
+        if A.left:
+            A.sum += A.left.sum
 
-        for node in A.subtree_iter():
-            print(node.item)
-            
-            predecessor = node.predecessor()
-            
-            if predecessor:
-                add = predecessor.sum
-                node.sum += add
+        if A.right:
+            A.sum += A.right.sum
+
+    def prefix_run(A):
+        print('\nStack called')
+        print(A.item)
+
+        if A.left:
+            A.left.prefix_run()
+
+        if A.right:
+            A.right.prefix_run()
+            A.prefix = A.sum - A.right.sum
+
+        # Leaf node case for right child
+        if A.parent and A.parent.right is A:
+            A.prefix = A.sum + A.parent.sum
+
+        if A.parent and A.parent.left is A:
+
+            predecessor = A.predecessor()
+            if predecessor:                
+                A.prefix = A.sum + predecessor.sum
+
+
                 
 class Part_B_Tree(Set_AVL_Tree):
     def __init__(A): 
@@ -43,6 +61,8 @@ class Part_B_Tree(Set_AVL_Tree):
                        | prefix sum s is maximum
         '''
         k, s = 0, 0
+
+
 
         return (k, s)
 
