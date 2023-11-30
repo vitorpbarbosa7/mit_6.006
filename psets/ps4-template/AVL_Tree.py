@@ -15,7 +15,7 @@ class AVL_Node:
 
     def skew(A):                            # O(1)
         return height(A.right) - height(A.left)
-
+    
     def subtree_iter(A):                    # O(n)
         if A.left:   yield from A.left.subtree_iter()
         yield A
