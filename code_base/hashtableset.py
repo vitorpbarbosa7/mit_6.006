@@ -2,7 +2,6 @@ from setinterface import SetFromSeq
 from linkedlistseqchainhash import LinkedListSeqChainHash
 from random import randint
 
-
 class HashTableSet:
     def __init__(self, r = 200):
         self.chain_set = SetFromSeq(LinkedListSeqChainHash)
@@ -130,11 +129,5 @@ class HashTableSet:
             yield x
             x = self.find_next(x.key)
 
+if __name__ == '__main__':
 
-
-
-
-
-
-
-    
