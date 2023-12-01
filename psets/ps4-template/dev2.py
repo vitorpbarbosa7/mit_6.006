@@ -33,21 +33,48 @@ class Part_B_Node(BST_Node):
         print(A.item)
 
         if A.left:
-            A.left.prefix_run()
+            A.left.prefix_run()        
 
         if A.right:
             A.right.prefix_run()
+
+        # Leaf nodes:
+        if A.left is None and A.right is None:
+            if A.parent:
+
+                # if left child node:
+                if A.parent.left is A:
+                    A.prefix = A.sum
+
+                # if right child node:
+                if A.parent.right is A:
+                    A.prefix = A.item.val + A.parent.sum
+
+        # if it has left and right nodes and is right child of parent
+        if A.left and A.right and A.parent and A.parent.right is A:
+            A.prefix = A.sum - A.right.sum + A.parent.sum
+
+        # if it has left and right nodes and is left child of parent
+        if A.left and A.right and A.parent and A.parent.left is A:
             A.prefix = A.sum - A.right.sum
 
-        # Leaf node case for right child
-        if A.parent and A.parent.right is A:
-            A.prefix = A.sum + A.parent.sum
+        if not A.left and A.right:
+            A.prefix = A.item.val
 
-        if A.parent and A.parent.left is A:
+        if not A.right and A.left:
 
-            predecessor = A.predecessor()
-            if predecessor:                
-                A.prefix = A.sum + predecessor.sum
+            # if is right child
+            if A.parent.right is A:
+                A.prefix = A.sum + A.parent.prefix
+
+            if A.parent.left is A:
+                A.prefix = A.sum
+
+
+
+        # if it is root:
+        if A.left and A.right and A.parent is None:
+            A.prefix = A.sum - A.right.sum
 
 
                 
@@ -94,6 +121,12 @@ if __name__ == '__main__':
 
     for element in elements:
         B.insert(element)
+
+    B.root.prefix_run()
+
+    print('----------main-------------')
+    # print(B.root.prefix)
+
 
 
 
