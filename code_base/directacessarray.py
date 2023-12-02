@@ -1,6 +1,12 @@
+from typing import Any
+
+
 class E:
     def __init__(self, key):
         self.key = key
+
+    def __repr__(self):
+        return str(self.key)
 
 class DirectAccessArray:
 	def __init__(self, u):
@@ -8,7 +14,7 @@ class DirectAccessArray:
 		self.A = [None] * (u + 1)
 
 	def __repr__(self):
-		return '[' + ', '.join(str(x.key) if x is not None else ' ' for x in self.A) + ']'
+		return '[' + ', '.join(str(x) if x is not None else ' ' for x in self.A) + ']'
 	
 	def find(self, k):
 		# O(1) As stored the key values in the index, and allocated that very much space, then acces in O(1)
@@ -54,6 +60,27 @@ if __name__ == '__main__':
 	DAA = DirectAccessArray(u)
 	for item in elements:
 		DAA.insert(item)
+	print(DAA)
+
+
+	DAA.insert(E(45))
+	print(DAA)
+
+	# Delete kth element
+	# Passing the key, not the element 
+	_pop = DAA.delete(2)
+	print(_pop)
+	print(DAA)
+	_max = DAA.delete_max()
+	print(_max)
+	print(DAA)
+	_max = DAA.find_max()
+	print(_max)
+	print(DAA)
+
+	# find next element after k key
+	_next = DAA.find_next(34)
+	print(_next)
 	print(DAA)
 	
 

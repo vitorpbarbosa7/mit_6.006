@@ -1,15 +1,22 @@
 from setinterface import SetFromSeq
-from linkedlistseqchainhash import LinkedListSeqChainHash
+from linkedlistseqchainhash import LinkedListSeq
 from random import randint
 
+class E:
+    def __init__(self, key):
+        self.key = key
+    def __repr__(self):
+        return str(self.key)
+
+# Possible using hash function or hash map 
 class HashTableSet:
     def __init__(self, r = 200):
-        self.chain_set = SetFromSeq(LinkedListSeqChainHash)
+        self.chain_set = SetFromSeq
         self.A = []
         self.size = 0
         self.r = r
         self.p = 2**31 - 1
-        self.a = randint(1, self.p, 1)
+        self.a = randint(1, self.p - 1)
         self._compute_bounds()
         self._resize(0)
 
@@ -21,11 +28,15 @@ class HashTableSet:
         for X in self.A:
             yield from X
 
+    def __repr__(self):
+        return ' ,'.join(str(x) for x in self.A)
+
     # O(n) expected
     # expected because low probability of collision and when colliding it will traverse the linked list to insert
     # can't insert in the linked list in constant time since it will only relink the pointers?
     def build(self, X):
-        for x in X: self.insert(x)
+        for x in X: 
+            self.insert(x)
 
     # apply the hash function to k, using m (number of indices ?? or other divisor?)
     def _hash(self, k, m):
@@ -40,17 +51,20 @@ class HashTableSet:
     def _resize(self, n):
         if (self.lower >= n) or (n >= self.upper):
             f = self.r // 100
-            if self.r % 100: f+=1
+            if self.r % 100:
+                f +=1
 
             # number of stored keys?
             m = max(n, 1) * f
 
             # A is composed of the chains
+            # initially empty chain
             A = [self.chain_set() for _ in range(m)]
             for x in self:
                 h = self._hash(k = x.key, m = m)
                 A[h].insert(x)
             
+            # here at the resize method, the initial A because the A which has inside a chain_set() to receive new items
             self.A = A
             self._compute_bounds()
 
@@ -70,9 +84,18 @@ class HashTableSet:
 
         # apply hash
         h = self._hash(k = x.key, m = len(self.A))
-
+        print(f'\nHash value returned: {h}')
+        print(h, x.key)
+        #breakpoint()()
+        
         # call chain
+        # A is the list from the hash table
+        # at index h of dynamic array, there is a chain implemented using Set
+
+        print(self.A)
         added = self.A[h].insert(x)
+        print(self.A)
+        #breakpoint()()
 
         return added
     
@@ -131,3 +154,10 @@ class HashTableSet:
 
 if __name__ == '__main__':
 
+    X = [randint(1, 10) for _ in range(100)]
+    elements = [E(x) for x in X]
+
+    hts = HashTableSet()
+    hts.build(elements)
+    
+    print(hts)

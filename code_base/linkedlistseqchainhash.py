@@ -1,5 +1,3 @@
-
-
 class LinkedListNode:
 
 	def __init__(self, X):
@@ -16,7 +14,7 @@ class LinkedListNode:
 		return self.next.later_node(i-1)
 
 
-class LinkedListSeqChainHash:
+class LinkedListSeq:
 
 	# O(1)
 	def __init__(self):
@@ -24,7 +22,8 @@ class LinkedListSeqChainHash:
 		self.size = 0 
 
 	# O(1)
-	def __len__(self): return self.size
+	def __len__(self): 
+		return self.size
 
 	# O(n)
 	def __iter__(self):
@@ -96,8 +95,11 @@ class LinkedListSeqChainHash:
 		# why bother returning? 
 		return X
 
-	def insert_last(self, X):	self.insert_at(len(self), X)
-	def delete_last(self):	return self.delete_at(len(self) - 1)
+	def insert_last(self, X):	
+		self.insert_at(len(self), X)
+
+	def delete_last(self):	
+		return self.delete_at(len(self) - 1)
 
 
 if __name__ == '__main__':

@@ -4,8 +4,11 @@ class ArraySeq:
         self.A = []
         self.size = 0
 
-    def __len__(self): self.size
-    def __iter__(self): yield from self.A
+    def __len__(self): 
+        return self.size
+
+    def __iter__(self):
+        yield from self.A
 
     def __repr__(self):
         return '['  + ', '.join(str(x) for x in self.A) + ']'
@@ -15,11 +18,13 @@ class ArraySeq:
         self.size = len(self.A)
 
     # O(1)
-    def get_at(self, i): return self.A[i]
+    def get_at(self, i): 
+        return self.A[i]
 
     # O(1)
     # get at the index and set it to the new value
-    def set_at(self, i, x): self.A[i] = x
+    def set_at(self, i, x): 
+        self.A[i] = x
 
     # O(n)
     # pass it a array A, which will receive the i + k item to the i + k location
@@ -47,7 +52,7 @@ class ArraySeq:
         A[i] = x
 
         # copy adding 1 to locations, that is why i + 1
-        self._copy_forward(i = i, n = n-2, A = A, j = i+1)
+        self._copy_forward(i = i, n = n-i, A = A, j = i+1)
 
         # now the self receives A rebuilded temporary here
         self.build(A)
