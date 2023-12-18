@@ -10,7 +10,7 @@ def counting_sort(A):
     # O(u) initialize the chains in each position of Direct Access Array - DAA
     DAA = [[] for i in range(u)]
 
-    # O(n) inserto into each chain of DAA, according to their key
+    # O(n) insert into each chain of DAA, according to their key
     # invariant or order preserved to be a stable sorting algorithm
     for x in A:
         DAA[x.key].append(x)
@@ -20,6 +20,8 @@ def counting_sort(A):
     i = 0
     for chain in DAA:
         for element in chain:
+            # get the elements into A in sorted order
+            # since it was inserted in sorted order
             A[i] = element
             i += 1
 

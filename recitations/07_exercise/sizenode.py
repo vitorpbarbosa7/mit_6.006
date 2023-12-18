@@ -27,6 +27,8 @@ class SizeNode(BinaryNode):
         if A.left:
              L_size = A.left.size # this left node will (like a recursion, but O(1)) have a size accounted for the subtree
         else: 
+            # if it has no left node, the size of L_size will be zero, and for example if we're searching for the most left (index 0) element, 
+            # it will correspond to i = 0, and finally return that element
              L_size = 0
     	
         # with this condition we go left

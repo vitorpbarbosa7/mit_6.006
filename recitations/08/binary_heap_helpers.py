@@ -45,6 +45,8 @@ def max_heapify_up(A, n, child):
         max_heapify_up(A, n, _parent)
 
 def max_heapify_down(A, n, _parent):
+    # recursive part with the _parent being next child
+
     # print(f'\n heapify down')
     # print(A)
 
