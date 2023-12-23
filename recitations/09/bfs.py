@@ -35,7 +35,7 @@ def bfs(Adj, s):
 def unweighted_shortest_path(Adj, s, t):
 
     # O(V + E) BFS tree from s ( s as root)
-    parent, _ = (Adj, s)
+    parent, _ = bfs(Adj, s)
     # O(1) t reachable from s?
     # we can not reach s from t if t has no parent node
     if parent[t] is None:
@@ -44,10 +44,11 @@ def unweighted_shortest_path(Adj, s, t):
     i = t
     # Start at t
     path = [t]
+    # go back for each parent, untill reach s
     while i != s:
-        # breakpoint()
-        # new parent to try to reach s 
-        i = parent[i][0]
+        print(parent[i])
+        breakpoint() 
+        i = parent[i]
         path.append(i)
     
     # O(|V|) return reversed path (we went from t to s?)
@@ -67,9 +68,6 @@ if __name__ == '__main__':
     s = 0
 
     paths, levels = bfs(A2, s)
-
-    print(paths)
-    print(levels)
 
     # shortest path
     t = 2
