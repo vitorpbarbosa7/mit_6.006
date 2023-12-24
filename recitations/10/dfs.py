@@ -29,7 +29,6 @@ def dfs(Adj, s, parent = None, order = None):
     # from the depth first search algorithm starting from the first stack s vertex
     return parent, order
 
-
 if __name__ == '__main__':
 
     A2 = [
