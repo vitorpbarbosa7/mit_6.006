@@ -1,15 +1,53 @@
 # ----------------------------------- #
 # REWRITE SOLVE IMPLEMENTING PART (e) # 
 # ----------------------------------- #
+
+def dfs(Adj, s, parent=None):
+    '''
+    Adj: Adjacency list (with weights)
+    s: start vertex
+    '''
+
+    if parent is None:
+        parent = {v: None for v in Adj}
+        parent[s] = s
+
+    # Iterate over each adjacent vertex and its weight
+    for v in Adj[s]:
+        if parent[v] is None:
+            parent[v] = s
+            dfs(Adj, v, parent=parent)
+
+    return parent
+
+def _explore_frontier(config, parent, verbose = False): 
+    # Explorer in Depth First Search manner instead of Breadth First Search manner
+
+    if config == SOLVED:
+        return True
+    
+    # print(parent)
+    # breakpoint()
+
+    # Explore frontier, adding new configs to parent and new_frontier
+    # Prints size of frontier if verbose is True
+    for new_config in neighbors(config):
+            if new_config not in parent:
+                parent[new_config] = config
+                if _explore_frontier(new_config, parent):
+                    return True
+
+    # if had not found any 
+    return False
+        
 def solve(config):
     # Return a sequence of moves to solve config, or None if not possible
 
     # Fully explore graph using BFS
     # A configuration is a vertex in the graph
     # that is why the parent of the configuration starts as None, as we have no parent for it yet
-    parent, frontier = {config: None}, [config]
-    while len(frontier) != 0:
-        frontier = explore_frontier(frontier, parent, True)
+    parent = {config: None}
+    _explore_frontier(config, parent, True)
     print('Searched %s reachable configurations' % len(parent))
     
     breakpoint()
