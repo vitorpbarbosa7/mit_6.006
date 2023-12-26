@@ -46,8 +46,7 @@ def unweighted_shortest_path(Adj, s, t):
     path = [t]
     # go back for each parent, untill reach s
     while i != s:
-        print(parent[i])
-        breakpoint() 
+        # print(parent[i])
         i = parent[i]
         path.append(i)
     

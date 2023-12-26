@@ -1,0 +1,18 @@
+
+
+initial config:
+config	"431034541020510233422515"
+
+f:
+0
+1
+2
+
+s:
+-1
+1
+
+# possible states from the initial configuration according to the face to rotate and in which direction, cloclwise or anticlockwise
+list
+0	1	2	3	4	5
+"304120345410510233422515"	"140354102034510233422515"	"530041241021351233442505"	"230053441021141233425505"	"431330425020515023424115"	"431432051020552403423115"

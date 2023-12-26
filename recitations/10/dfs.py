@@ -15,6 +15,9 @@ def dfs(Adj, s, parent = None, order = None):
 
     for v in Adj[s]:
         # O(1) if no parent vertex exist for v yet in the parent list
+        # if some adjacent node has already been visited, for example in previous stack call, it will backtrack, that is 
+        # it will not enter into the another recursive call, it will not create a deeper level in the stack, but go back 
+        # a level up in the stack 
         if parent[v] is None:
             # O(1) assign the s as parent vertex to v
             parent[v] = s

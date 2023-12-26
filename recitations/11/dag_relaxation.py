@@ -13,6 +13,9 @@ def dag_relaxation(Adj, s):
     # Source vertex parent pointer is each self, s, and distance to itself is 0
     d[s], parent[s] = 0, s
 
+    # The topological sort order, got from Depth First Search, guarantees that
+    # the relaxation, that is, trying to find the new best shortest path
+    # will occur in the order they appear in the graph, in a possible right path 
     for u in topological_order:
         for v in Adj[u]:
 
