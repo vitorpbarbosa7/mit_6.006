@@ -10,6 +10,15 @@ def solve_tilt(B, t):
     ##################
     return M
 
+
+def neighbors(B):
+    MOVES = ['up','down','left','right']
+    ns = []
+    for m in MOVES:
+        B = move(B, m)
+        S = board_str(B)
+        ns.append(S)
+
 ####################################
 # USE BUT DO NOT MODIFY CODE BELOW #
 ####################################
@@ -23,6 +32,7 @@ def move(B, d):
     B_ = list(list(row) for row in B)
 
     # Let us see a little about those moves
+    
     if d == 'up':
         for x in range(n):  
             y_ = 0          
