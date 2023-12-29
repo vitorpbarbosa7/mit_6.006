@@ -21,6 +21,8 @@ def move(B, d):
     '''
     n = len(B)
     B_ = list(list(row) for row in B)
+
+    # Let us see a little about those moves
     if d == 'up':
         for x in range(n):  
             y_ = 0          

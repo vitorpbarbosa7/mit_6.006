@@ -16,8 +16,9 @@ def bfs(Adj, s):
     parent[s] = s
     # O(1) Initialize levels 
     level = [[s]]
-    # 
-    while 0 < len(level[-1]):
+    
+    # while there are new nodes being added to the levels
+    while len(level[-1]) > 0:
         # O(1) make new level, as has already explored all previous adjancy nodes in previous level
         # Runs in ammortized with the python list dynamic array implementation
         level.append([])
