@@ -11,13 +11,6 @@ def solve_tilt(B, t):
     return M
 
 
-def neighbors(B):
-    MOVES = ['up','down','left','right']
-    ns = []
-    for m in MOVES:
-        B = move(B, m)
-        S = board_str(B)
-        ns.append(S)
 
 ####################################
 # USE BUT DO NOT MODIFY CODE BELOW #
@@ -84,3 +77,31 @@ def board_str(B):
     rows.append(rows[0])
     S = '\n'.join(rows)
     return S
+
+def board_str_double(B1, B2, move):
+    '''
+    Input:  B1    | First board configuration
+            B2    | Second board configuration
+            move  | Move direction ('left', 'right', 'up', or 'down')
+    Output: s     | ASCII string representing the transition from B1 to B2
+    '''
+    n = len(B1)
+    rows = []
+
+    # Determine the arrow symbol based on the move
+    arrow_map = {'left': '<', 'right': '>', 'up': '^', 'down': 'v'}
+    arrow = arrow_map.get(move, '?')
+
+    # Creating the top and bottom borders
+    border_row = '+' + ('-' * n) + '+' + '   ' + '+' + ('-' * n) + '+'
+    rows.append(border_row)
+
+    # Creating the rows with board elements and an arrow in between
+    for row_B1, row_B2 in zip(B1, B2):
+        row_str = '|' + ''.join(row_B1) + '|' + ' ' + arrow + ' ' + '|' + ''.join(row_B2) + '|'
+        rows.append(row_str)
+
+    rows.append(border_row)
+
+    # Joining the rows to form the complete string
+    return '\n'.join(rows)

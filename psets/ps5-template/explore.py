@@ -1,15 +1,15 @@
-from solve_tilt import move, board_str
+from solve_tilt import move, board_str, board_str_double
 
 def neighbors(B):
     MOVES = ['up','down','left','right']
     ns = []
     for m in MOVES:
-        B = move(B, m)
-        S = board_str(B)
-        print(f'\n New neighbor from move {m}:')
-        print(S)
+        Bnext = move(B, m)
+        # print(f'\n New neighbor from move {m}:')
+        # print(S)
+        print(board_str_double(B, Bnext, m))
         breakpoint()
-        ns.append(S)
+        ns.append(Bnext)
 
     return ns
 
@@ -33,10 +33,13 @@ if __name__ == '__main__':
         ('.', '.', '.', '.', '.'),
         ('#', '#', '#', '.', '.')
     )
-    print(f'Initial configuration:\n')
-    print(board_str(config))
 
     # mapping of parent nodes, and the frontier with new configurations
     parent, frontier = {config: None}, [config]
 
-    explore_frontier(frontier, parent)
+    # deep explore with bfs, to get the intuition:
+    cont = 1
+    while cont < 100:
+        frontier = explore_frontier(frontier, parent)
+        print(len(parent))
+        cont += 1
