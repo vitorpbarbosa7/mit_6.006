@@ -7,7 +7,7 @@ def neighbors(config):
         new_config = move(config, m)
         # print(f'\n New neighbor from move {m}:')
         # print(S)
-        # print(board_str_double(B, Bnext, m))
+        # print(board_str_double(config, new_config, m))
         # breakpoint()
         ns.append(new_config)
 
@@ -26,19 +26,22 @@ def explore_frontier(frontier, parent):
 
     return new_frontier
 
-def _check_match(frontier, parent):
-    '''
-    Checks if the configurations in one of the frontiers already appears in the parent set 
-    of configurations from the other side exploration
-    If found that node, than this is the "middle", the point in which both explorations from 
-    bfs, from both sides, meet each other, therefore we can construct the full path
-    '''
+def check_solved(config, t):
+    # column x
+    x = t[0]
+    # row y
+    y = t[1]
+    if config[y][x] == 'o':
+        return True 
+    return False
 
-    for config in frontier:
-        if config in parent:
-            return config
-        
-    return None
+def unweighted_shortest_path(source_config, destination_config, parent):
+
+    initial_config = destination_config
+    path = [destination_config]
+
+    # go backtracking
+
 
 if __name__ == '__main__':
 
@@ -49,17 +52,24 @@ if __name__ == '__main__':
         ('.', '.', '.', '.', '.'),
         ('#', '#', '#', '.', '.')
     )
+    t = (4, 3)
 
     # mapping of parent nodes, and the frontier with new configurations
     parent, frontier = {config: None}, [config]
 
     # We haven't found the middle point in which both explorations meet each other, so
-    middle = None
-    cont = 1
-    while cont < 100:
+    solved = False
+    while not solved:
         # previous frontier as input to explore
         # so next frontier is created from last frontier
         # parent dict maps each config to its parent
         frontier = explore_frontier(frontier, parent)
-        print(len(parent))
-        cont += 1
+        for config in frontier:            
+            print('checking if solved or not')
+            breakpoint()
+            solved = check_solved(config, t)
+            if solved:
+                print('-------- SOLVED !!!')
+                print(board_str(config))
+                break
+
