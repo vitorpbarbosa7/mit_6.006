@@ -2,16 +2,16 @@ from solve_tilt import move, board_str, board_str_double
 
 def neighbors(config):
     MOVES = ['up','down','left','right']
-    ns = []
+    register_moves = {}
     for m in MOVES:
         new_config = move(config, m)
         # print(f'\n New neighbor from move {m}:')
         # print(S)
         # print(board_str_double(config, new_config, m))
         # breakpoint()
-        ns.append(new_config)
+        register_moves[new_config] = m
 
-    return ns
+    return register_moves
 
 def explore_frontier(frontier, parent):
 
@@ -19,9 +19,11 @@ def explore_frontier(frontier, parent):
     # explore one frontier of configurations
     # creating other frontier with new configurations
     for config in frontier:
-        for new_config in neighbors(config):
+        _neighbors = neighbors(config)
+        for new_config, move in _neighbors.items():
             if new_config not in parent:
-                parent[config] = config
+                # from the config, the move was {move} to get to the new_config
+                parent[new_config] = [config, move]
                 new_frontier.append(new_config)
 
     return new_frontier
@@ -35,13 +37,30 @@ def check_solved(config, t):
         return True 
     return False
 
-def unweighted_shortest_path(source_config, destination_config, parent):
+def unweighted_shortest_path(
+    source_config, 
+    destination_config, 
+    parent
+    ):
 
-    initial_config = destination_config
-    path = [destination_config]
+    current_config = destination_config
+    moves = []
+    while current_config != source_config:
+        # Backtrack in the graph
+        list_single_node_backtrack = parent[current_config]
+        print(list_single_node_backtrack)
+        breakpoint()
+        current_config = list_single_node_backtrack[0]
+        current_move = list_single_node_backtrack[1]
 
-    # go backtracking
+        moves.append(current_move)
+        print(f'\n Moves till now: {moves}')
 
+    # it returns the moves in backtracking order 
+    # so reverse it 
+    
+    moves.reverse()
+    return moves
 
 if __name__ == '__main__':
 
@@ -55,7 +74,7 @@ if __name__ == '__main__':
     t = (4, 3)
 
     # mapping of parent nodes, and the frontier with new configurations
-    parent, frontier = {config: None}, [config]
+    parent, frontier = {config: [None, None]}, [config]
 
     # We haven't found the middle point in which both explorations meet each other, so
     solved = False
@@ -64,12 +83,20 @@ if __name__ == '__main__':
         # so next frontier is created from last frontier
         # parent dict maps each config to its parent
         frontier = explore_frontier(frontier, parent)
-        for config in frontier:            
+        for node_config in frontier:            
             print('checking if solved or not')
             breakpoint()
-            solved = check_solved(config, t)
+            solved = check_solved(node_config, t)
             if solved:
                 print('-------- SOLVED !!!')
-                print(board_str(config))
+                print(board_str(node_config))
+                destination_config = node_config
                 break
 
+         
+    moves = unweighted_shortest_path(
+        source_config=config,
+        destination_config=destination_config,
+        parent = parent
+    )
+    print(moves)
