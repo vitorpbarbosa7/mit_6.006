@@ -20,11 +20,13 @@ def dag_relaxation(Adj, s):
         for v in Adj[u]:
 
             print(f'{u} : {Adj[u]}')
-            try_to_relax(Adj, w, d, parent, u, v, s)
+            try_to_relax(Adj, d, parent, u, v, s)
     
     return d, parent
 
-def try_to_relax(Adj, w, d, parent, u, v, s):
+def try_to_relax(Adj, d, parent, u, v, s):
+
+    # trying to find new paths with less weight
 
     old_d = d[v]
     if d[v] > d[u] + w(Adj, u, v):
@@ -38,11 +40,7 @@ def try_to_relax(Adj, w, d, parent, u, v, s):
         parent[v] = u
 
 def w(Adj, u, v):
-
     return Adj[u][v]
-
-
-
 
 if __name__ == '__main__':
 

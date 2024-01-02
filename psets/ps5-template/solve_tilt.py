@@ -81,12 +81,19 @@ def solve_tilt(B, t):
         for node_config in frontier:            
             print('checking if solved or not')
             # breakpoint()
+            # does this guarantees that in some cases will not explore the full graph ?
+            # full graph is C(n, b, s) possible states 
             solved = check_solved(node_config, t)
             if solved:
                 print('-------- SOLVED !!!')
                 print(board_str(node_config))
                 destination_config = node_config
                 break
+
+    # TODO 
+    # should implement the C(n, b, s)
+    # if the count reach the C(n, b, s) value and had not solved,
+    # then return None
 
          
     M = unweighted_shortest_path(
