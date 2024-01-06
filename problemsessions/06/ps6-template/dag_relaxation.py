@@ -53,18 +53,25 @@ if __name__ == '__main__':
     for s, t in edges:
         print(s, t)
         G[s][t] = job_times[t]
+    print(G)
     
     # check vertex which have no parent pointers at all
     has_parent = set()
     for u in G:
-        for v in G[v]:
+        for v in G[u]:
             has_parent.add(v)
     
     not_parent = set()
     for vertex in G:
         if vertex not in has_parent:
             not_parent.add(vertex)
+    
+    G['S'] = {}
+    for v in not_parent:
+        G['S'][v] = job_times[v]
+    print(G)
 
+    s = 'S'
     print(s)
     breakpoint()
     distances, parent = dag_relaxation(G, s)
@@ -72,11 +79,11 @@ if __name__ == '__main__':
     print(parent)
 
     # modify the weight for the source points and put them into a list for dag relaxation 
-    for v in distances:
-        if distances[v] == float('inf'):
-            distances[v] = job_times[v]
+    # for v in distances:
+    #     if distances[v] == float('inf'):
+    #         distances[v] = job_times[v]
 
-    print(distances)
+    # print(distances)
 
 
     
