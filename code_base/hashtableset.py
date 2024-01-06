@@ -21,7 +21,8 @@ class HashTableSet:
         self._resize(0)
 
     # O(1)
-    def __len__(self): return self.size
+    def __len__(self): 
+        return self.size
 
     # O(n)
     def __iter__(self):
@@ -40,8 +41,14 @@ class HashTableSet:
 
     # apply the hash function to k, using m (number of indices ?? or other divisor?)
     def _hash(self, k, m):
-        return ((self.a * k) % self.p) % m
-
+        print(f'p: {self.p}; a: {self.a}, m: {m}')
+        # BUG
+        # FIXME
+        # m can't always be so low, will always collide in 0, 1 or 2
+        h = ((self.a * k) % self.p) % m
+        print(f'Hash value {h} from original {k}')
+        breakpoint()
+        return h 
     # O(1)
     def _compute_bounds(self):
         self.upper = len(self.A)
