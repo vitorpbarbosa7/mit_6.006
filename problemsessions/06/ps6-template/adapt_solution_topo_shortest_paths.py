@@ -53,7 +53,7 @@ def printG(G):
 if __name__ == '__main__':
 
     # Construct Graph
-    job_times = [('A', 2), ('B', 5), ('C', 5), ('D', 3), ('E', 4)]
+    job_times = [('A', 1), ('B', 5), ('C', 5), ('D', 3), ('E', 4)]
     job_times = {job: time for job, time in job_times}
 
     # --> make all times negative:
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     # The min distance comes from here
     dist, _ = dag_relaxation(G, 'S')
     print(dist)
-    print('\n\n')
-    print(f'Negative distance: {min(dist)} {dist[min(dist)]}')
-
+    dist_array = [d for _, d in dist.items()]
+    print(dist_array)
+    print(min(dist_array))
 

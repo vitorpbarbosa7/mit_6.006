@@ -48,4 +48,8 @@ def min_time(C, D):
             if rank[v1] > rank[v2]:
                 return None
     dist, _ = topo_shortest_paths(Adj, lambda u, v: w[(u, v)], 0)
+
+    #debug
+    print('\n')
+    print(dist)
     return -min(dist)  # compute min time
