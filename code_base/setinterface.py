@@ -35,6 +35,7 @@ class SetFromSeq(ArraySeq):
                 self.S.set_at(i, x)
                 return 
         self.S.insert_last(x)
+        return x
     
     # O(n)
     # again, iterate over, find the key, when key is found, them delete it 

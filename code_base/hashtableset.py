@@ -1,6 +1,7 @@
 from setinterface import SetFromSeq
 from linkedlistseqchainhash import LinkedListSeq
 from random import randint
+from typing import List
 
 class E:
     def __init__(self, key):
@@ -12,7 +13,7 @@ class E:
 class HashTableSet:
     def __init__(self, r = 200):
         self.chain_set = SetFromSeq
-        self.A = []
+        self.A: List[SetFromSeq] = []
         self.size = 0
         self.r = r
         self.p = 2**31 - 1
@@ -30,7 +31,7 @@ class HashTableSet:
             yield from X
 
     def __repr__(self):
-        return ' ,'.join(str(x) for x in self.A)
+        return '[ ' + ' ,'.join(str(x) for x in self.A) + ' ]'
 
     # O(n) expected
     # expected because low probability of collision and when colliding it will traverse the linked list to insert
@@ -47,7 +48,7 @@ class HashTableSet:
         # m can't always be so low, will always collide in 0, 1 or 2
         h = ((self.a * k) % self.p) % m
         print(f'TAMANHO DESSA PORCARIA: {m}')
-        print(f'Original {k} -> Hash: {h}')
+        print(f'\n Original {k} -> Hash: {h} \n')
         return h 
     # O(1)
     def _compute_bounds(self):
@@ -98,15 +99,20 @@ class HashTableSet:
         # at index h of dynamic array, there is a chain implemented using Set
 
         print(self.A)
+        # if A 
         added = self.A[h].insert(x)
-        print(self.A)
-        #breakpoint()()
+        print(f'type of A[h]: {type(self.A[h])}')
+        print(f'Added new element: {added}')
+        # breakpoint()
 
         # how I really missed that
         # bugfix
         if added:
             self.size += 1
+            print(f'Increased the fucking size: {self.size}')
 
+        if len(self.A[h]) > 1:
+            print(f'\n !!! COLLISION FOUND: {self.A[h]} !!!')
         return added
     
 
