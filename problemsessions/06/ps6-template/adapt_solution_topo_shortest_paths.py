@@ -1,4 +1,5 @@
 from dfs import dfs
+from set_dfs_topological_order_detect_cycle import topological_order 
 
 def dag_relaxation(Adj, s):
     # Depth First Search returns an order of the graph
@@ -42,67 +43,52 @@ def try_to_relax(Adj, d, parent, u, v, s):
 def w(Adj, u, v):
     return Adj[u][v]
 
+def printG(G):
+    print('\n\nG')
+    for k, v in G.items():
+        print(k, v)
+    print('\n\n')
+
 
 if __name__ == '__main__':
 
+    # Construct Graph
     job_times = [('A', 2), ('B', 5), ('C', 5), ('D', 3), ('E', 4)]
     job_times = {job: time for job, time in job_times}
-    edges = [('A', 'C'), ('C', 'B'), ('C', 'E'), ('D', 'E'), ('A', 'B'), ('D', 'B')]
 
+    # --> make all times negative:
+    job_times = {job: -time for job, time in job_times.items()}
+    edges = [('A', 'C'), ('C', 'B'), ('C', 'E'), ('D', 'E'), ('A', 'B'), ('D', 'B')]
     G = {v: {} for v, _ in job_times.items()}
     for s, t in edges:
         print(s, t)
-        G[s][t] = job_times[t]
-    print(G)
-    
-    # check vertex which have no parent pointers at all
-    has_parent = set()
+        G[s][t] = job_times[t]    
+    printG(G)
+    G['S'] = {}
+    for v, t in job_times.items():
+        G['S'][v] = t
+    printG(G)
+
+    # Detect cycle
+    _, order = dfs(G, 'S')
+    topo_order = topological_order(order)
+    print(topo_order)
+    topo_order = {v: idx for idx, v in enumerate(topo_order)}
+    rank = {v: None for v in G} 
+    for v in G:
+        position = topo_order[v]
+        rank[v] = position
+    # print(f'\n\nPosition of each vertex in the topological order: \n {rank}\n\n')
     for u in G:
         for v in G[u]:
-            has_parent.add(v)
-    
-    not_parent = set()
-    for vertex in G:
-        if vertex not in has_parent:
-            not_parent.add(vertex)
-    
-    G['S'] = {}
-    for v in not_parent:
-        G['S'][v] = job_times[v]
-    print(G)
+            if rank[u] > rank[v]:
+                # return None
+                raise Exception("Found don't know what")
 
-    ds = []
-    ps = []
-    for s in not_parent:
-        distances, parent = dag_relaxation(G, s)
-        ds.append(distances)
-        ps.append(parent)
-        print('\n\n')
-        print(distances)
-        print(parent)
-
-    # remove from parent according to some rule in the distance
-    
-
-    from set_dfs_topological_order_detect_cycle import full_dfs, topological_order
-    parent, order = full_dfs(G)
-    print('\n',parent)
-    print('\n',order)
-    topo_order = topological_order(order)
-    print('\n',topo_order)
-
-    for vertex in topo_order[::-1]:
-        vertex = ps[0][vertex]
-        print(vertex)
-
-        
-        
+    # The min distance comes from here
+    dist, _ = dag_relaxation(G, 'S')
+    print(dist)
+    print('\n\n')
+    print(f'Negative distance: {min(dist)} {dist[min(dist)]}')
 
 
-
-    # modify the weight for the source points and put them into a list for dag relaxation 
-    # for v in distances:
-    #     if distances[v] == float('inf'):
-    #         distances[v] = job_times[v]
-
-    # print(distances)

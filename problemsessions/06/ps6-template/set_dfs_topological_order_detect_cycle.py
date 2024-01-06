@@ -51,7 +51,7 @@ def full_dfs(Adj):
     return parent, order
 
 def topological_order(dfs_return_order):
-    return order[::-1]
+    return dfs_return_order[::-1]
 
 
 if __name__ == '__main__':
