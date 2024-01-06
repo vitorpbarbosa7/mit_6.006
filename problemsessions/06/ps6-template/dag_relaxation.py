@@ -45,7 +45,7 @@ def w(Adj, u, v):
 
 if __name__ == '__main__':
 
-    job_times = [('A', 1), ('B', 5), ('C', 5), ('D', 3), ('E', 4)]
+    job_times = [('A', 2), ('B', 5), ('C', 5), ('D', 3), ('E', 4)]
     job_times = {job: time for job, time in job_times}
     edges = [('A', 'C'), ('C', 'B'), ('C', 'E'), ('D', 'E'), ('A', 'B'), ('D', 'B')]
 
@@ -54,20 +54,16 @@ if __name__ == '__main__':
         print(s, t)
         G[s][t] = job_times[t]
 
+    # now add the source auxiliar vertex S
+    Gprime = G.copy()
+    Gprime['S'] = {}
+    for v in G:
+        Gprime['S'][v] =  job_times[v]
     print(G)
-
-    G = {
-        'A': {'C': 5, 'B': 5},
-        'B': {},
-        'C': {'E': 4, 'B': 5},
-        'D': {'E': 4, 'B': 5},
-        'E': {}
-    }
-    # Gprime = {v: }    
-
+    print(Gprime)
     s = 'S'
 
-    distances, parent = dag_relaxation(G, s)
+    distances, parent = dag_relaxation(Gprime, s)
     print(distances)
     print(parent)
     
