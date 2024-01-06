@@ -46,8 +46,8 @@ class HashTableSet:
         # FIXME
         # m can't always be so low, will always collide in 0, 1 or 2
         h = ((self.a * k) % self.p) % m
-        print(f'Hash value {h} from original {k}')
-        breakpoint()
+        print(f'TAMANHO DESSA PORCARIA: {m}')
+        print(f'Original {k} -> Hash: {h}')
         return h 
     # O(1)
     def _compute_bounds(self):
@@ -68,6 +68,7 @@ class HashTableSet:
             # initially empty chain
             A = [self.chain_set() for _ in range(m)]
             for x in self:
+                # se esta bosta retornar sempre a mesma porcaria de valor, vai ter colisão pra caralho
                 h = self._hash(k = x.key, m = m)
                 A[h].insert(x)
             
@@ -91,10 +92,7 @@ class HashTableSet:
 
         # apply hash
         h = self._hash(k = x.key, m = len(self.A))
-        print(f'\nHash value returned: {h}')
-        print(h, x.key)
-        #breakpoint()()
-        
+ 
         # call chain
         # A is the list from the hash table
         # at index h of dynamic array, there is a chain implemented using Set
@@ -103,6 +101,11 @@ class HashTableSet:
         added = self.A[h].insert(x)
         print(self.A)
         #breakpoint()()
+
+        # how I really missed that
+        # bugfix
+        if added:
+            self.size += 1
 
         return added
     
@@ -161,7 +164,7 @@ class HashTableSet:
 
 if __name__ == '__main__':
 
-    X = [randint(1, 10) for _ in range(100)]
+    X = [randint(1, 100) for _ in range(10)]
     elements = [E(x) for x in X]
 
     hts = HashTableSet()
