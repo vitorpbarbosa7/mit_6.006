@@ -58,7 +58,7 @@ def topological_order(dfs_return_order):
 if __name__ == '__main__':
 
     A2 = [
-        [1,2],
+        [],
         [],
         [3],
         [4],

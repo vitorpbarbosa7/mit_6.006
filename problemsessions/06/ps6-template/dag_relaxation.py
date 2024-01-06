@@ -53,17 +53,30 @@ if __name__ == '__main__':
     for s, t in edges:
         print(s, t)
         G[s][t] = job_times[t]
+    
+    # check vertex which have no parent pointers at all
+    has_parent = set()
+    for u in G:
+        for v in G[v]:
+            has_parent.add(v)
+    
+    not_parent = set()
+    for vertex in G:
+        if vertex not in has_parent:
+            not_parent.add(vertex)
 
-    # now add the source auxiliar vertex S
-    Gprime = G.copy()
-    Gprime['S'] = {}
-    for v in G:
-        Gprime['S'][v] =  job_times[v]
-    print(G)
-    print(Gprime)
-    s = 'S'
-
-    distances, parent = dag_relaxation(Gprime, s)
+    print(s)
+    breakpoint()
+    distances, parent = dag_relaxation(G, s)
     print(distances)
     print(parent)
+
+    # modify the weight for the source points and put them into a list for dag relaxation 
+    for v in distances:
+        if distances[v] == float('inf'):
+            distances[v] = job_times[v]
+
+    print(distances)
+
+
     
