@@ -1,3 +1,5 @@
+from daa import DirectAccessArray, E
+
 def dfs(Adj, s, parent = None, order = None):
     '''
     Adj: Adjacency list 
@@ -68,3 +70,17 @@ if __name__ == '__main__':
     print(order)
     topo_order = topological_order(order)
     print(topo_order)
+
+    elements = [E(x) for x in topo_order]
+	# max key we find in O(n)
+    u = max([el.key for el in elements])
+    daa = DirectAccessArray(u)
+    for e in elements:
+        daa.insert(e)
+    print(daa)
+    print('Show that is really a DAA')
+    print(daa.A)
+
+
+
+
