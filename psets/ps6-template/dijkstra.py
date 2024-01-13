@@ -1,13 +1,14 @@
 from priorityqueueheap import PriorityQueueMinHeap
 from relaxation import try_to_relax
 
+INF = 99999
 def dijkstra(Adj, s):
     '''
     Adj: Adjacency set with weights
     s: source vertex
     '''
     # initial shortest paths estimates
-    d = {v: float('inf') for v in Adj}
+    d = {v: INF for v in Adj}
     # parent pointers for each vertex
     parent = {v: None for v in Adj}
     # source distance and parent pointer

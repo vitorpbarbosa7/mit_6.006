@@ -53,9 +53,12 @@ def bellman_ford(Adj, s):
         # breakpoint()
         for v in Adj[u]:
             if d[v] > d[u] + w(Adj, u,v):
-                raise Exception('Ack ! There is a negative weight cycle')
+                # raise Exception('Ack ! There is a negative weight cycle')
+                print('Ack ! There is a negative weight cycle')
+                return None
     
-    return d, parent
+    # return d, parent
+    return d
 
 if __name__ == '__main__':
 
