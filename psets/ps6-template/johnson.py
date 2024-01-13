@@ -1,5 +1,11 @@
 INF = 99999     # distance magnitudes will not be larger than this number
 
+#https://www.geeksforgeeks.org/johnsons-algorithm/
+# Adding the super node does create a trivial solution of shortest path 0 for all nodes
+# Some nodes will have negative shortest path distances, which is better than the 0 solution of the 
+# connected edge of the super node s to all nodes
+# because of the internal negative nodes
+
 def johnson(n, S):
     '''
     Input:  n | Number of vertices in the graph
