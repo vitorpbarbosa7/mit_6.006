@@ -78,5 +78,16 @@ if __name__ == '__main__':
             if hash_reference_index[u] < hash_reference_index[v]:
                 print('Ok')
             else:
-                raise Exception(f'Found a Cycle: {u}-{v}')
+                print(f'Found a Cycle: {u}-{v}')
+                # return the cycle itself:
+                last_term_cycle = v
+                backtrack_cycle = u
+                cycle = [last_term_cycle, backtrack_cycle]
+                while backtrack_cycle != last_term_cycle:
+                    backtrack_cycle = parent[backtrack_cycle]
+                    cycle.append(backtrack_cycle)
+
+                print(cycle[::-1])
+            
+    # return the cycle itself:
 
