@@ -41,6 +41,7 @@ def bellman_ford(Adj, s):
     # Number of vertices
     V = len(Adj)
     # Process to relax all edges in |V| - 1 steps
+    # So it passes through every edge |V| times
     for k in range(V - 1):
         # print(f'k {k} iteration to relax the edges')
         # breakpoint()

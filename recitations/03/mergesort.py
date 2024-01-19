@@ -11,19 +11,25 @@ def merge_sort(A, a = 0, b = None):
 	c = (a + b + 1)//2
 	
 	if b - a > 1:
+		# Divide --------------
 		# left node
 		merge_sort(A, a, c)
 		# right node
 		merge_sort(A, c, b)
-	
+
+		# Conquer ---------------
 		# auxiliar temporary arrays necessary for this implementation of mergesort
 		# not in place
 		L = A[a:c]
 		R = A[c:b]
 		
+		print('\n---')
 		print(A)
 		print(L)
 		print(R)
+		print(a)
+		print(b)
+		print('\n---')
 	
 		# merge part with the temporary storage L and R
 		
@@ -44,6 +50,7 @@ def merge_sort(A, a = 0, b = None):
 	
 			a += 1
 			print('A after', A)
+			breakpoint()
 		
 
 A = [8,3,6,1,9,2,7,4]
