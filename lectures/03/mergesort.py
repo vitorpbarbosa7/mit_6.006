@@ -9,6 +9,9 @@ def merge(L, R, A, i, j, a, b):
 	i: len(L)
 	j: len(R)
 	'''
+
+	# Each call of the subproblem solves has work of n/2, it is smallest in deeper levels of the recursion tree
+	# And it is higher in higher levels of the tree, since it will have to make the two finger algorithm for n numbers?
 	
 	print('\n------------ Merge Stack created -------------')
 	print(f'''

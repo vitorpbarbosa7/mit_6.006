@@ -5,6 +5,8 @@ def fib_efficient(n, d):
     if n in d:
         return d[n]
     else:
+        # work done by each call of the subproblem is an addition
+        # constant time of work at each call of the subproblem
         ans = fib_efficient(n-1, d) + fib_efficient(n-2, d)
         # store the recent calculated after many as needed stack calls of the recusion
         d[n] = ans

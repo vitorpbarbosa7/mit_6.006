@@ -20,6 +20,10 @@ def isPal(s):
         return True
     else:
         # Recursively call the middle part of the palindrome
+        # WORK done by each subproblem is here
+        # we execute a boolean relation among them 
+
+        # we may have to execute some min, max, optimal local solution, like in greedy algorithm
         return s[0] == s[-1] and isPal(s[1:-1])
 
 def isPalindrome(s):
