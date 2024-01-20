@@ -1,4 +1,6 @@
-
+# top down 
+# think about the recursive calls 
+# from top to the bottom
 
 def bowl(A):
     memo = {}
@@ -12,6 +14,7 @@ def bowl(A):
         if i >= len(A)-1:
             return 0 
         # if we have not calculated that from last to back suffix
+        # So it will not go down into another recursive call if the memo has already stored the value for that specific prefix, suffix of substring
         if i not in memo:
             # go to another pin without counting this one
             skip_pin_score = B(i+1)
