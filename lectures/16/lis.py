@@ -1,13 +1,13 @@
 
 A = 'CARBOHYDRATE'
 
-A = 'DEAF'
+A = 'EFAGBCD'
 
 n = len(A)
 def x(i):
     print('\nStack frame created')
     print(f'Suffix to use brute force with others: {A[i:]}')
-    breakpoint()
+    # breakpoint()
     # Base case
     # the index makes the suffix reaches its end
     if i == n:
