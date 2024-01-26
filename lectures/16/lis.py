@@ -21,8 +21,11 @@ def x(i):
         # elemento anterior deve ser menor que o proximo elemento 
         # logo fazemos brute force para ver se comecando com a letra i
         # quais sao as subsequences existentes
-        if A[i] < A[j]:
+        if A[j] > A[i]:
             print(f'Found {A[j]} greather than {A[i]}')
+            # and for j, how many can I put on top of each, after it?
+            # that will respect that the first i goes before, than j, than we found from j, what can go after this j, using the recursion itself
+            # and at the end of this recursion call we return that it is 1 (current i) + maximum number of less than, which is marked in the lis_js
             lis_js[j] = x(j)
 
     # we enforce that i is in the answer, maybe the longest increasing subsequence will not have

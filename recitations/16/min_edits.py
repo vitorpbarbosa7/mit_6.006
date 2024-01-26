@@ -5,15 +5,21 @@ B = 'FG'
 
 na = len(A)
 nb = len(B)
-memo = [[None]*nb for _ in range(na)]
+memo = [[None]*(nb+1) for _ in range(na+1)]
 
 # Initialize base cases for the last column
-for i in range(na-2, -1, -1):
-    memo[i][nb-1] = memo[i+1][nb-1] + 1
+memo[na][nb] = 0
+memo[na-1][nb] = 1
+memo[na][nb-1] = 1
+for i in range(na-1, -1, -1):
+    memo[i][nb] = memo[i+1][nb] + 1
+print(np.matrix(memo))
 
 # Initialize base cases for the last row
-for j in range(nb-2, -1, -1):
-    memo[na-1][j] = memo[na-1][j+1] + 1
+for j in range(nb-1, -1, -1):
+    memo[na][j] = memo[na][j+1] + 1
+print(np.matrix(memo))
+# breakpoint()
 
 def x(i, j):
     print('\nStack')
@@ -23,7 +29,7 @@ def x(i, j):
     print(f'A[i:] - {A[i:]}')
     print(f'B[i:] - {B[j:]}')
     print(np.matrix(memo))
-    breakpoint()
+    # breakpoint()
 
     # Base Case:
     if i == na or  j == nb:
