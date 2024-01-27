@@ -1,15 +1,11 @@
+import numpy as np
+
 INF = -float('inf')
 
-def count_paths(F):
-    '''
-    Input:  F | size-n direct access array of size-n direct access arrays
-              | each F[i][j] is either 't', 'm', or 'x'
-              | for tree, mushroom, empty respectively
-    Output: m | the number of distinct optimal paths in F
-              | starting from (0,0) and ending at (n-1,n-1)
-    '''
-    p = 0
+def indicator_mushroom(FF, ii, jj):
+    return int(FF[ii][jj]=='m')
 
+def testk(F):
     n = len(F)
     memok = [[None]*(n+1) for _ in range(n+1)]
     memok[n][:] = [0]*(n+1)
@@ -31,13 +27,7 @@ def count_paths(F):
     # Original Problem
     quick_paths = x(0, 0, memox, n, F, memok)
     print(quick_paths)
-
-    p = quick_paths
     
-    return p
-
-def indicator_mushroom(FF, ii, jj):
-    return int(FF[ii][jj]=='m')
 
 def k(i, j, memok, n, F):
     # print(f'i: {i} and j: {j}')
@@ -112,4 +102,9 @@ def x(i, j, memox, n, F, memok):
             memox[i][j] += x(i+1, j, memox, n, F, memok)
 
     return memox[i][j]
+    
+from tests import tests
+
+for input, _ in tests:
+     testk(F = input)
 
