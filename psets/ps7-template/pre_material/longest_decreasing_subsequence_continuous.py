@@ -1,5 +1,5 @@
 
-A = [1,2,3,4,5,6,5,4,3,2,1,8,2,6,5,4,3]
+A = [1,2,3,3,4,5,6,5,4,3,2,1,8,2,6,5,4,3]
 
 memo = [None]*len(A)
 memo[-1] = 1
@@ -20,8 +20,12 @@ def x(i):
         return memo[i]
     
     else:
-        memo[i] = 0 
-        return -x(i+1) + x(i+1)
+        # with the call of the memo[i] it will continue to update the memo array
+        # even if not returned here
+        # and the memo array can be used in the next level
+        x(i+1)
+        memo[i] = 1 
+        return memo[i]
     
 def original_problem(memo):
     return max(memo)
