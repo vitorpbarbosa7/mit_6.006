@@ -79,8 +79,6 @@ def original_problem(memo):
     subsequence = memo[max_length]
     return max_length, subsequence
 
-inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
-inputB = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
 def single_company_shortest_value(input, n, k):
     A = convert_prices(input, n, k)
     print(A)
@@ -94,5 +92,11 @@ def single_company_shortest_value(input, n, k):
     print(max_length)
     print(subsequence)
 
-single_company_shortest_value(*inputA)
-single_company_shortest_value(*inputB)
+    return max_length, subsequence
+
+if __name__ == '__main__':
+    inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
+    inputB = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
+
+    single_company_shortest_value(*inputA)
+    single_company_shortest_value(*inputB)
