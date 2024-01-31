@@ -66,8 +66,8 @@ def x(i, memo, A):
             else:
                 pass
             memo[i] = (1 + suffix_sum, elements_from_current_tuple + returned_subsequence)
-            # print(memo[i])
-            breakpoint()
+            print(memo[i])
+            # breakpoint()
             return memo[i]
         # even if when going down in the stack with the (compare_tuple_value(i)) there was a bigger element
         # when going back, going up in the stack, the element we chose maybe is greater than the element in the current level
