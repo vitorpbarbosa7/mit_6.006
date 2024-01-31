@@ -1,4 +1,4 @@
-from longest_decreasing_subsequence_continuous_memo import x 
+from longest_decreasing_subsequence_continuous_memo import lcds 
 
 def convert_prices(input, n, k):
 
@@ -28,9 +28,8 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
         return
     # from those, we always get the min value, because it is better to continue
     # to build the longest decreasing continuous subsequence from the tuples
-    filtered = sorted(filtered, reverse=True)
     print(filtered)
-    breakpoint()
+    # breakpoint()
     return filtered
 
 def x(i, memo, A):
@@ -40,7 +39,7 @@ def x(i, memo, A):
 
     # single element at the end
     if i == len(A)-1:
-        local_length = local_subsequence = x(A[i])
+        local_length, local_subsequence = lcds(A[i])
         memo[i] = (local_length, local_subsequence)
         return memo[i]
     
@@ -70,7 +69,7 @@ def x(i, memo, A):
             # x(i+1)
             # if we have not found any element in the current tuple which is greater than any element in the next tuple
             # it means we can use the min of the current tuple to try building for next ones
-            local_length = local_subsequence = x(A[i])
+            local_length, local_subsequence = lcds(A[i])
             memo[i] = (local_length, local_subsequence)
             return memo[i]
     
@@ -81,7 +80,7 @@ def x(i, memo, A):
         x(i+1, memo, A)
         # if we have not found any element in the current tuple which is greater than any element in the next tuple
         # it means we can use the min of the current tuple to try building for next ones
-        local_length = local_subsequence = x(A[i])
+        local_length, local_subsequence = lcds(A[i])
         memo[i] = (local_length, local_subsequence)
         return memo[i]
 
@@ -96,7 +95,7 @@ def single_company_shortest_value(input, n, k):
     print(A)
     memo = [(None, []) for _ in range(len(A))]
     # Base case for memo
-    local_length = local_subsequence = x(A[-1])
+    local_length, local_subsequence = lcds(A[-1])
     memo[-1] = (local_length, local_subsequence)
     # Solve problem using suffix
     x(0, memo, A)
