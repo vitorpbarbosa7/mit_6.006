@@ -1,24 +1,3 @@
-def short_company(C, P, n, k):
-    '''
-    Input:  C | Tuple of s = |C| strings representing names of companies
-            P | Tuple of s lists each of size nk representing prices
-            n | Number of days of price information
-            k | Number of prices in one day
-    Output: c | Name of a company with highest shorting value
-            S | List containing a longest subsequence of 
-              | decreasing prices from c that doesn't skip days
-    '''
-    c = C[0]
-
-    hashtable = {key: [value, []] for key, value in zip(C, P)}
-    print(hashtable)
-    breakpoint()
-
-    S = []
-    ##################
-    # YOUR CODE HERE #
-    ##################
-    return (c, S)
 
 def convert_prices(input, n, k):
 
@@ -27,14 +6,6 @@ def convert_prices(input, n, k):
         result.append(input[i:i+k])
 
     return result
-
-# inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
-# A = convert_prices(*inputA)
-# print(A)
-
-# inputA = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
-# A = convert_prices(*inputA)
-# print(A)
 
 def compare_tuple_value(i, A):
     greater = []
@@ -49,7 +20,7 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
     previous_elements = A[i]
     print(previous_elements)
     print(first_element_returned_subsequence)
-    breakpoint()
+    # breakpoint()
     filtered = [num for num in previous_elements if num > first_element_returned_subsequence]
     # maybe going up in the stack, in the way the numbers were chosen, there is no element here
     if len(filtered) == 0:
@@ -58,10 +29,7 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
     # to build the longest decreasing continuous subsequence from the tuples
     return min(filtered)
 
-memo = [(None, []) for _ in range(len(A))]
-# Base case for memo
-memo[-1] = (1, [min(A[-1])])
-def x(i):
+def x(i, memo, A):
     print('Stack frame called')
     print(f'Suffix: {A[i:]}')
     # breakpoint()
@@ -73,10 +41,10 @@ def x(i):
     # We want decreasing subsequence
     # if A[i+1] < A[i]:
     # this function is needed to go down in the stack, in the suffix way 
-    if compare_tuple_value(i):
-        suffix_sum, returned_subsequence = x(i+1)
+    if compare_tuple_value(i, A):
+        suffix_sum, returned_subsequence = x(i+1, memo, A)
         first_element_returned_subsequence = returned_subsequence[0]
-        element_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence)
+        element_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence, A)
         if element_from_current_tuple is not None:
             memo[i] = (1 + suffix_sum, [element_from_current_tuple] + returned_subsequence)
             return memo[i]
@@ -99,7 +67,7 @@ def x(i):
         # with the call of the memo[i] it will continue to update the memo array
         # even if not returned here
         # and the memo array can be used in the next level
-        x(i+1)
+        x(i+1, memo, A)
         # if we have not found any element in the current tuple which is greater than any element in the next tuple
         # it means we can use the min of the current tuple to try building for next ones
         memo[i] = (1, [min(A[i])]) 
@@ -110,8 +78,21 @@ def original_problem(memo):
     max_length = max(memo)
     subsequence = memo[max_length]
     return max_length, subsequence
-x(0)
 
-max_length, subsequence = original_problem(memo)
-print(max_length)
-print(subsequence)
+inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
+inputB = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
+def single_company_shortest_value(input, n, k):
+    A = convert_prices(input, n, k)
+    print(A)
+    memo = [(None, []) for _ in range(len(A))]
+    # Base case for memo
+    memo[-1] = (1, [min(A[-1])])
+
+    # Solve problem using suffix
+    x(0, memo, A)
+    max_length, subsequence = original_problem(memo)
+    print(max_length)
+    print(subsequence)
+
+single_company_shortest_value(*inputA)
+single_company_shortest_value(*inputB)
