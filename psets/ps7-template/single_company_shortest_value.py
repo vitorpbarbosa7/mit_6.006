@@ -1,3 +1,4 @@
+from longest_decreasing_subsequence_continuous_memo import x 
 
 def convert_prices(input, n, k):
 
@@ -27,7 +28,10 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
         return
     # from those, we always get the min value, because it is better to continue
     # to build the longest decreasing continuous subsequence from the tuples
-    return min(filtered)
+    filtered = sorted(filtered, reverse=True)
+    print(filtered)
+    breakpoint()
+    return filtered
 
 def x(i, memo, A):
     print('Stack frame called')
@@ -36,7 +40,9 @@ def x(i, memo, A):
 
     # single element at the end
     if i == len(A)-1:
-        return 1, [min(A[i])]
+        local_length = local_subsequence = x(A[i])
+        memo[i] = (local_length, local_subsequence)
+        return memo[i]
     
     # We want decreasing subsequence
     # if A[i+1] < A[i]:
@@ -44,9 +50,13 @@ def x(i, memo, A):
     if compare_tuple_value(i, A):
         suffix_sum, returned_subsequence = x(i+1, memo, A)
         first_element_returned_subsequence = returned_subsequence[0]
-        element_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence, A)
-        if element_from_current_tuple is not None:
-            memo[i] = (1 + suffix_sum, [element_from_current_tuple] + returned_subsequence)
+        elements_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence, A)
+        if elements_from_current_tuple is not None:
+            if isinstance(elements_from_current_tuple, int):
+                elements_from_current_tuple = [elements_from_current_tuple]
+            else:
+                pass
+            memo[i] = (1 + suffix_sum, elements_from_current_tuple + returned_subsequence)
             return memo[i]
         # even if when going down in the stack with the (compare_tuple_value(i)) there was a bigger element
         # when going back, going up in the stack, the element we chose maybe is greater than the element in the current level
@@ -60,7 +70,8 @@ def x(i, memo, A):
             # x(i+1)
             # if we have not found any element in the current tuple which is greater than any element in the next tuple
             # it means we can use the min of the current tuple to try building for next ones
-            memo[i] = (1, [min(A[i])]) 
+            local_length = local_subsequence = x(A[i])
+            memo[i] = (local_length, local_subsequence)
             return memo[i]
     
     else:
@@ -70,7 +81,8 @@ def x(i, memo, A):
         x(i+1, memo, A)
         # if we have not found any element in the current tuple which is greater than any element in the next tuple
         # it means we can use the min of the current tuple to try building for next ones
-        memo[i] = (1, [min(A[i])]) 
+        local_length = local_subsequence = x(A[i])
+        memo[i] = (local_length, local_subsequence)
         return memo[i]
 
 def original_problem(memo):
@@ -84,8 +96,8 @@ def single_company_shortest_value(input, n, k):
     print(A)
     memo = [(None, []) for _ in range(len(A))]
     # Base case for memo
-    memo[-1] = (1, [min(A[-1])])
-
+    local_length = local_subsequence = x(A[-1])
+    memo[-1] = (local_length, local_subsequence)
     # Solve problem using suffix
     x(0, memo, A)
     max_length, subsequence = original_problem(memo)
