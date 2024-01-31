@@ -1,17 +1,12 @@
 
 import numpy as np
-A = 'CARBOHYDRATE'
-# A = 'EFAGBCD'
-
-n = len(A)
-big_memo = [(0, [])]*len(A)
-memo = [[(0, [])]*len(A) for _ in range(len(A))]
-def x(i):
+def x(i, memo, A, big_memo):
     print('\nStack frame created')
     print(f'Suffix to use brute force with others: {A[i:]}')
     # breakpoint()
     # Base case
     # the index makes the suffix reaches its end
+    n = len(A)
     if i == n:
         base_case_count = 0
         base_case_subsequence = []
@@ -34,7 +29,7 @@ def x(i):
             # and for j, how many can I put on top of each, after it?
             # that will respect that the first i goes before, than j, than we found from j, what can go after this j, using the recursion itself
             # and at the end of this recursion call we return that it is 1 (current i) + maximum number of less than, which is marked in the lis_js
-            jcount, jsub = x(j, memo, A, big_memo)
+            jcount, jsub = x(j, memo , A, big_memo)
             memo[i][j] = (jcount, jsub)
             lis_js[j] = (jcount, jsub)
 
@@ -52,11 +47,11 @@ def x(i):
     # breakpoint()
     return  (count, subsequence)
 
-def original_problem():
-
+def original_problem(A, memo, big_memo):
     all_lengths, all_subsequences = [], []
+    n = len(A)
     for i in range(n):
-        single_length, single_subsequence = x(i)
+        single_length, single_subsequence = x(i, memo, A, big_memo)
         all_lengths.append(single_length)
         all_subsequences.append(single_subsequence)
 
@@ -67,6 +62,14 @@ def original_problem():
 
     return max_length, max_subsequence
 
-final_length, final_subsequence = original_problem()
-print(final_length)
-print(final_subsequence)
+def lis(A):
+    big_memo = [(0, [])]*len(A)
+    memo = [[(0, [])]*len(A) for _ in range(len(A))]
+    final_length, final_subsequence = original_problem(A, memo, big_memo)
+    return final_length, final_subsequence
+    
+if __name__ == '__main__':
+    A = 'CARBOHYDRATE'
+    final_length, final_subsequence = lis(A)
+    print(final_length)
+    print(final_subsequence)

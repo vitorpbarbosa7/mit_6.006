@@ -39,7 +39,6 @@ def x(i, memo, A):
 
     # single element at the end
     if i == len(A)-1:
-        # longest decreasing subsequence of last tuple?
         local_length, local_subsequence = lds(A[i])
         memo[i] = (local_length, local_subsequence)
         return memo[i]
@@ -48,21 +47,15 @@ def x(i, memo, A):
     # if A[i+1] < A[i]:
     # this function is needed to go down in the stack, in the suffix way 
     if compare_tuple_value(i, A):
-        print(A[i])
-        print(A[i+1])
-        breakpoint()
         suffix_sum, returned_subsequence = x(i+1, memo, A)
         first_element_returned_subsequence = returned_subsequence[0]
         elements_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence, A)
-        print(elements_from_current_tuple)
         if elements_from_current_tuple is not None:
             if isinstance(elements_from_current_tuple, int):
                 elements_from_current_tuple = [elements_from_current_tuple]
             else:
                 pass
             memo[i] = (1 + suffix_sum, elements_from_current_tuple + returned_subsequence)
-            print(memo[i])
-            breakpoint()
             return memo[i]
         # even if when going down in the stack with the (compare_tuple_value(i)) there was a bigger element
         # when going back, going up in the stack, the element we chose maybe is greater than the element in the current level
@@ -115,7 +108,7 @@ def single_company_shortest_value(input, n, k):
 
 if __name__ == '__main__':
     inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
-    inputB = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20, 90, 80, 3, 2), 5, 2)
+    inputB = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
     inputC = ((52, 91, 86, 81, 1, 79, 64, 43, 32, 94, 42, 91, 9, 25, 73, 29, 31, 19, 70, 58, 12, 11, 41, 66, 63, 14, 39, 71, 38, 91), 10, 3)
 
     # single_company_shortest_value(*inputA)
