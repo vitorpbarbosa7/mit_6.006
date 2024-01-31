@@ -19,8 +19,8 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
     # previous_elements = sorted(A[i], reverse = True)
     # only elements which are greater than the first element in the returned subsequence
     previous_elements = A[i]
-    print(previous_elements)
-    print(first_element_returned_subsequence)
+    # print(previous_elements)
+    # print(first_element_returned_subsequence)
     # breakpoint()
     filtered = [num for num in previous_elements if num > first_element_returned_subsequence]
     # maybe going up in the stack, in the way the numbers were chosen, there is no element here
@@ -28,13 +28,13 @@ def get_element_current_tuple(i, first_element_returned_subsequence, A):
         return
     # from those, we always get the min value, because it is better to continue
     # to build the longest decreasing continuous subsequence from the tuples
-    print(filtered)
+    # print(filtered)
     # breakpoint()
     return filtered
 
 def x(i, memo, A):
     print('Stack frame called')
-    print(f'Suffix: {A[i:]}')
+    # print(f'Suffix: {A[i:]}')
     # breakpoint()
 
     # single element at the end
@@ -53,15 +53,20 @@ def x(i, memo, A):
         breakpoint()
         suffix_sum, returned_subsequence = x(i+1, memo, A)
         first_element_returned_subsequence = returned_subsequence[0]
+        #################################
+        # THIS PART MUST BE WRONG
         elements_from_current_tuple = get_element_current_tuple(i, first_element_returned_subsequence, A)
         print(elements_from_current_tuple)
+        _, elements_from_current_tuple = lds(elements_from_current_tuple)
+        print(elements_from_current_tuple)
+        breakpoint()
         if elements_from_current_tuple is not None:
             if isinstance(elements_from_current_tuple, int):
                 elements_from_current_tuple = [elements_from_current_tuple]
             else:
                 pass
             memo[i] = (1 + suffix_sum, elements_from_current_tuple + returned_subsequence)
-            print(memo[i])
+            # print(memo[i])
             breakpoint()
             return memo[i]
         # even if when going down in the stack with the (compare_tuple_value(i)) there was a bigger element
@@ -99,7 +104,7 @@ def original_problem(memo):
 
 def single_company_shortest_value(input, n, k):
     A = convert_prices(input, n, k)
-    print(A)
+    # print(A)
     memo = [(None, []) for _ in range(len(A))]
     # Base case for memo
     local_length, local_subsequence = lds(A[-1])
@@ -107,9 +112,9 @@ def single_company_shortest_value(input, n, k):
     # Solve problem using suffix
     x(0, memo, A)
     max_length, subsequence = original_problem(memo)
-    print(max_length)
-    print(subsequence)
-    print(memo)
+    # print(max_length)
+    # print(subsequence)
+    # print(memo)
 
     return max_length, subsequence
 

@@ -58,23 +58,32 @@ def original_problem(A, memo, big_memo):
     # populate with possible more subsequences
     collection_result = [[k, v] for k, v in zip(all_lengths, all_subsequences)]
 
-    print(collection_result)
-    breakpoint()
+    def get_sequence_with_criteria(data):
+        # Define a custom key function for the max function
+        def custom_key(item):
+            length, sequence = item
+            return (length, -sequence[0])  # Tuple for comparison, negate the value
 
-    max_length = max(collection_result)
-    max_subsequence = collection_result[max_length]
+        # Find the item with the maximum length and smallest highest value
+        max_item = max(data, key=custom_key)
 
+        return max_item[0], max_item[1]  # Return the sequence
+
+    max_length, max_subsequence = get_sequence_with_criteria(collection_result)
     return max_length, max_subsequence
 
 def lds(A):
     big_memo = [(0, [])]*len(A)
     memo = [[(0, [])]*len(A) for _ in range(len(A))]
     final_length, final_subsequence = original_problem(A, memo, big_memo)
+
+    print(f'\n\n Input to LDS: {A} \n -- Return From LDS: \n {final_length}, {final_subsequence}')
+    breakpoint()
     return final_length, final_subsequence
     
 if __name__ == '__main__':
     A = 'CARBOHYDRATE'
-    A = (4,20)
+    A = [5,25,4,10]
     final_length, final_subsequence = lds(A)
     print(final_length)
     print(final_subsequence)
