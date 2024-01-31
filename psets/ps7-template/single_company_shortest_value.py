@@ -91,12 +91,15 @@ def single_company_shortest_value(input, n, k):
     max_length, subsequence = original_problem(memo)
     print(max_length)
     print(subsequence)
+    print(memo)
 
     return max_length, subsequence
 
 if __name__ == '__main__':
     inputA = ((12, 19, 7, 17, 5, 10, 5, 25, 4, 20), 5, 2)
     inputB = ((13, 25, 14, 2, 9, 17, 16, 13, 10, 16), 5, 2)
+    inputC = ((52, 91, 86, 81, 1, 79, 64, 43, 32, 94, 42, 91, 9, 25, 73, 29, 31, 19, 70, 58, 12, 11, 41, 66, 63, 14, 39, 71, 38, 91), 10, 3)
 
-    single_company_shortest_value(*inputA)
-    single_company_shortest_value(*inputB)
+    # single_company_shortest_value(*inputA)
+    # single_company_shortest_value(*inputB)
+    single_company_shortest_value(*inputC)
