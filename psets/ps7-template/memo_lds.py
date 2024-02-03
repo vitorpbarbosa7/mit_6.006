@@ -83,7 +83,7 @@ def lds(A):
     
 if __name__ == '__main__':
     A = 'CARBOHYDRATE'
-    A = [5,25,4,10]
+    A = [52, 91, 86, 81, 1, 79, 64, 43, 32, 94, 42, 91, 9, 25, 73, 29, 31, 19, 70, 58, 12, 11, 41, 66, 63, 14, 39, 71, 38, 91]
     final_length, final_subsequence = lds(A)
     print(final_length)
     print(final_subsequence)

@@ -53,6 +53,8 @@ def bellman_ford(Adj, s):
     for u in Adj:
         # breakpoint()
         for v in Adj[u]:
+            # if we already executed |V| - 1 steps of relaxation process
+            # and yet there is another relaxation process to occur, it means there is a cycle
             if d[v] > d[u] + w(Adj, u,v):
                 # raise Exception('Ack ! There is a negative weight cycle')
                 print('Ack ! There is a negative weight cycle')

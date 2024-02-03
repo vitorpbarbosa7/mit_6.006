@@ -44,9 +44,7 @@ def x(i, memo, A):
         memo[i] = (local_length, local_subsequence)
         return memo[i]
     
-    # We want decreasing subsequence
-    # if A[i+1] < A[i]:
-    # this function is needed to go down in the stack, in the suffix way 
+    # next price will be in the same day, or next day
     if compare_tuple_value(i, A):
         print(A[i])
         print(A[i+1])
