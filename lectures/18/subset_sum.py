@@ -34,5 +34,5 @@ def x(i, t):
 
 T = 6
 result = x(0, T)
-# vs.make_animation("lis_subsetsum.gif", delay=2)
+# vs.make_animation("subsetsum.gif", delay=2)
 print(result)
