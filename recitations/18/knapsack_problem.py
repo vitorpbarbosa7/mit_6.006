@@ -4,10 +4,6 @@
 A = [10,8,4,5,3,7,2,6,1,9]
 S = [2,3,5,7,1,4,1,6,3,8]
 
-memo = [[None]*len(A) for _ in range(len(S))]
-for s in range(len(S)):
-    memo[len(A)-1][s] = 0
-
 def dp(i, s):
 
     # Base Case Suffixes
