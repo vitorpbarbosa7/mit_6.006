@@ -26,6 +26,7 @@ class SeqBinaryTree(BinaryTree):
                 root.right = build_subtree(X, c + 1, j)
                 root.right.parent = root
 
+            # keep tree invariantes
             root.subtree_update()
 
             return root
@@ -97,23 +98,28 @@ if __name__ == '__main__':
 
     zero = tree.get_at(0)
     one = tree.get_at(1)
+    print('zero th item ')
     print(zero)
+    print('first item ')
     print(one)
 
     five = tree.get_at(5)
     six = tree.get_at(6)
+    print('fifth item ')
     print(five)
+    print('sixth item ')
     print(six)
 
     print(tree)
 
-    print('\ninsert at')
+    print('\ninsert at index = 2')
     tree.insert_at(2, 'H')
     print(tree)
+    print('set a index to another value')
     tree.set_at(1, 'I')
     print(tree)
 
-    print('\ndeleting items')
+    print('\ndeleting items at specific position')
     deleted = tree.delete_at(3)
     print(deleted)
     print(tree)
