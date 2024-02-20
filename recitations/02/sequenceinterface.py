@@ -23,6 +23,7 @@ class ArraySeq:
 
     def insert_at(self, i, x): # O(n)
         n = len(self)
+        # Starts a whole new array
         A = [None] * (n + 1)
         self._copy_forward(0, i, A, 0)
         A[i] = x
@@ -43,3 +44,19 @@ class ArraySeq:
     def delete_first(self): return self.delete_at(0)
     def insert_last(self, x): self.insert_at(len(self), x)
     def delete_last(self): return self.delete_at(len(self) - 1)
+
+if __name__ == '__main__':
+
+    arrayseq = ArraySeq()
+    X = [1,4,2,6,3,7]
+    arrayseq.build(X)
+
+    arrayseq.get_at(4)
+    arrayseq.set_at(3, 999)
+
+    arrayseq.insert_at(7, 34)
+    arrayseq.delete_at(5, 32)
+    arrayseq.insert_first(2)
+    arrayseq.delete_first()
+    arrayseq.insert_last(4)
+    arrayseq.delete_last(8)
