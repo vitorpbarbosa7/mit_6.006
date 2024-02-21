@@ -43,8 +43,6 @@ class HashTableSet:
     # apply the hash function to k, using m (number of indices ?? or other divisor?)
     def _hash(self, k, m):
         print(f'p: {self.p}; a: {self.a}, m: {m}')
-        # BUG
-        # FIXME
         # m can't always be so low, will always collide in 0, 1 or 2
         h = ((self.a * k) % self.p) % m
         print(f'TAMANHO DESSA PORCARIA: {m}')

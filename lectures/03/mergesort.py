@@ -50,7 +50,8 @@ def merge_sort(A, a = 0, b = None):
 	print(f'Pointers define array: {A[a:b]}')
 	breakpoint()
 
-	if b is None: b = len(A)
+	if b is None: 
+		b = len(A)
 		
 	if b - a > 1:
 		# get middle 

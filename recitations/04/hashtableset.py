@@ -1,8 +1,9 @@
-
+ # LOOK FOR THE CODE IN THE CODE BASE  
 
 
 # insert uses resize, resize uses chain_set
-
+ 
+# just interface go get the intuition
 class Hash_Table_Set:
     def __init__(self, r = 200):
         self.chain_set = Set_from_Seq(Linked_List_Seq)

@@ -1,19 +1,20 @@
 
 
 class E:
-    def __init__(self, key):
+    def __init__(self, key = None):
         self.key = key
-
-    
-    def __init__(self):
-
-        # The digits that will serve for the tuple sort part
         self.digits = None
-        
         self.item = None
+    
+    # def __init__(self):
+
+    #     # The digits that will serve for the tuple sort part
+    #     self.digits = None
         
-        # the new keys
-        self.key = None
+    #     self.item = None
+        
+    #     # the new keys
+    #     self.key = None
 
 def counting_sort(A): # A: List[Obj]
  
@@ -48,7 +49,7 @@ def radix_sort(A): # A: List[Obj]
     # as the logn(u), just getting how much elements are needed to represent the number u in base n
     c = 1 + (u.bit_length() // n.bit_length())
 
-    D = [Obj() for x in A]
+    D = [E() for x in A]
 
     # O(nc) make digit tuples
     # O(n) because we will traverse each item in A

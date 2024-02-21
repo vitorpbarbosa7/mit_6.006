@@ -4,6 +4,8 @@ def prefix_max(A, i):
 		# iteration using recurrence, moving pointer
 		# find biggest element from 0 to ith element, which makes sense to 
 		# make the swap later
+
+		# important to notice that the i will decrease in the call of the selection sort algorithm
 		j = prefix_max(A, i - 1)
 		if A[j] > A[i]:
 			return j

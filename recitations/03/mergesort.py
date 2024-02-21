@@ -1,6 +1,3 @@
-
-
-
 def merge_sort(A, a = 0, b = None):
 	print('Stack frame created')
 
