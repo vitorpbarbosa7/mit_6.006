@@ -70,14 +70,22 @@ if __name__ == '__main__':
     topo_order = topological_order(order)
     print(topo_order)
 
+    # the hash keeps the
+    # -> key: vertice it self
+    #-> value: order in the topological order
+    # that is why we can compare if the v node has a topo order lower than u
+    # this would be a cycle 
     hash_reference_index = {v: idx for idx, v in enumerate(topo_order)}
     print(hash_reference_index)
     # check the order of the u - v edges in the topological order
     for u in A2:
         for v in A2[u]:
-            if hash_reference_index[u] < hash_reference_index[v]:
+            if hash_reference_index[v] > hash_reference_index[u]:
                 print('Ok')
             else:
+                # hash_reference_index[v] < hash_reference_index[u]
+                # next node can not have a lower topological position
+                # exactly because is a next node 
                 print(f'Found a Cycle: {u}-{v}')
                 # return the cycle itself:
                 last_term_cycle = v

@@ -6,7 +6,7 @@ def dfs(Adj, s, parent = None, order = None):
 
     # O(1) Initialize the parent list 
     if parent is None:
-        # O(|V|) - use hash if unlabeled
+        # O(|V|) - use hash if unlabeled to construct it (like build) 
         parent = [None for v in Adj] 
         # O(1) - the root of the tree will be s, from which will follow to the other vertices, traversing them 
         parent[s] = s
@@ -17,7 +17,9 @@ def dfs(Adj, s, parent = None, order = None):
         # O(1) if no parent vertex exist for v yet in the parent list
         # if some adjacent node has already been visited, for example in previous stack call, it will backtrack, that is 
         # it will not enter into the another recursive call, it will not create a deeper level in the stack, but go back 
-        # a level up in the stack 
+        # a level up in the stack
+
+        # if it has no parent, that parent will be me : ) 
         if parent[v] is None:
             # O(1) assign the s as parent vertex to v
             parent[v] = s
@@ -25,7 +27,8 @@ def dfs(Adj, s, parent = None, order = None):
             # We go a deeper level to traverse the child nodes of v
             dfs(Adj, v, parent = parent, order=order)
 
-   # in each stack append the source vertex 
+   # in each stack append the parent node to the order 
+    # so the last node will be the first addes, reverse it, and you have topological order
     order.append(s)
 
     # It is returned the parent nodes from the tree which was constructed
