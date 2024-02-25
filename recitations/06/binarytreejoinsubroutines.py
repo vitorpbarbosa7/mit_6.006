@@ -30,6 +30,8 @@ class BinaryNode:
     def subtree_first(A):
         '''Traversing left, as in the traversal order, left comes first'''
 
+        # by calling A.left and again the function which calls A.left if exists
+        # we're recursing always left to go to this subtree first
         if A.left: 
             return A.left.subtree_first()
         else: 
@@ -38,6 +40,7 @@ class BinaryNode:
     def subtree_last(A):
         '''Traversing right, as in the traversal order, right comes after'''
 
+        # symetric idea from subtree_first
         if A.right:
             return A.right.subtree_last()
         

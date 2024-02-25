@@ -32,6 +32,9 @@ class BinaryNode:
     # O(1) - with augmentation height
     def subtree_update(A):
         # Every time we do something, update the augmentation properties
+        # if A node is a leaf node, it will not exist the left and right, returning -1 for each
+        # max of -1 
+        # and the height of the leaf node will be finally 0
         A.height = 1 + max(height(A.left), height(A.right))
 
         # find_min augmentation:

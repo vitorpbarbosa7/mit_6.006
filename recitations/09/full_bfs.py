@@ -10,10 +10,14 @@ def bfs(Adj, s, parent):
     
     while 0 < len(level[-1]):
         level.append([])
+        # for each node in the current level 
         for u in level[-2]:
+            # for each adjancent node in of that single vertex in the current level
             for v in Adj[u]:
                 if parent[v] is None:
+                    # the parent of the v is u
                     parent[v] = u
+                    # and v will be added to the last level 
                     level[-1].append(v)
 
 def full_bfs(Adj):
@@ -26,6 +30,12 @@ def full_bfs(Adj):
         if parent[v] is None:
             bfs_calls += 1
             print(bfs_calls)
+
+            # breadth first search, runs from a single vertex to all vertex from which it can reach
+            # keeping parent pointers from each node
+            # running full breatdh first search accounts for all nodes
+            # but if already visited, will not be computed again
+            # the line of 'if parent[v] is None' accounts for that   
             bfs(Adj, v, parent)
             order.append(v)  # Optional: Record the order of BFS calls
 
@@ -44,4 +54,5 @@ if __name__ == '__main__':
 
     parent, order = full_bfs(A2)
     print("Parent:", parent)
+    # does this corresponds to topological order ?
     print("Order of BFS calls:", order)

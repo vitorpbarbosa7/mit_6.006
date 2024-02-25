@@ -47,11 +47,13 @@ def unweighted_shortest_path(Adj, s, t):
     path = [t]
     # go back for each parent, untill reach s
     while i != s:
+        # they all have a single parent, that is why it works 
+        # the final parent will be the "s" start vertex
         # print(parent[i])
         i = parent[i]
         path.append(i)
     
-    # O(|V|) return reversed path (we went from t to s?)
+    # O(|V|) return reversed path (because we started at t and went back )
     return path[::-1]
 
 

@@ -3,25 +3,30 @@
 class E:
     def __init__(self, key = None):
         self.key = key
+        # The digits that will serve for the tuple sort part
         self.digits = None
         self.item = None
-    
-    # def __init__(self):
 
-    #     # The digits that will serve for the tuple sort part
-    #     self.digits = None
-        
-    #     self.item = None
-        
-    #     # the new keys
-    #     self.key = None
+    def __str__(self):
+        return f'''\nkey: {self.key} - digits: {self. digits} - item: {self.item}'''
+    
+    def __repr__(self):
+        return self.__str__()
 
 def counting_sort(A): # A: List[Obj]
+
+    print('Input of counting Sort')    
+    print(A)
+    breakpoint()
+    
  
     # O(n) find maximum key of A
     u = 1 + max([x.key for x in A]) 
 
     # O(u) initialize the chains in each position of Direct Access Array - DAA
+    # the chains are necessary to keep the order in which the items were put there
+    # preserving previous ordres from least significant sorting make previously 
+    # allowing for an algorithm which will for each pass, be stable 
     DAA = [[] for i in range(u)]
 
     # O(n) inserto into each chain of DAA, according to their key
@@ -37,7 +42,7 @@ def counting_sort(A): # A: List[Obj]
             A[i] = element
             i += 1
 
-
+# The tuple sort uses each pass of the direct access array sort (modified to be stable with the chaining, which make us call it a counting sort)
 def radix_sort(A): # A: List[Obj]
     "Sort A assuming A has non-negative keys"
 
@@ -65,13 +70,20 @@ def radix_sort(A): # A: List[Obj]
             D[i].digits.append(low)
     
     # imagine the tuple will be of length two
-    # the first time it will assign to the D list the key equals to D[j].digits[0], that is, the element from the tuple which is index 0 (least significant algorithm)
-    # the second time it will assignt the the D list the key equals to D[j].digits[1], that is, the element from the tuple which is index 1 (more significant algorithm)
+    # the first time it will assign to the D list the key equals to D[j].digits[0], that is, the element from the tuple which is index 0 (least significant digit)
+    # the second time it will assignt the D list the key equals to D[j].digits[1], that is, the element from the tuple which is index 1 (more significant digit)
+            
+    # apply the couting sort (modified direct acess sort) for each of the digits, which represent the general number in the n base 
+    # that is why we used the divmod(k, n) for each k in n, as max(A[n]) = u, and u might be u >> n
     for i in range(c):
         # for all elements 
         for j in range(n): 
             D[j].key = D[j].digits[i]
+        # using the counting sort (modified direct acess array sort to be stable)
         counting_sort(D)
+        # so D is being sorted the current significant digit (which is assigned to the key) is asked for, and the item it self (original number) 
+        # the digits (least to most significant, we have stored before in the looping with divmod)
+        # will be following this sorting sequence
     
     for i in range(n):
         A[i] = D[i].item
