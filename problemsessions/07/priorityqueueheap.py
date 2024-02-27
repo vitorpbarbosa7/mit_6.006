@@ -6,7 +6,7 @@ class Item:
 class PriorityQueue:
     def __init__(self):
         # remember that a priority queue heap implementation uses a implicit data structure, that is 
-        # a array
+        # a array, in which we do not have pointers, or references
         self.A = []
         # Another necessary data structure of a hash to use as cross linking to achieve
         # constant time look-up for each element in the heap by the distance to source vertex
@@ -54,8 +54,10 @@ class PriorityQueue:
         # amortized with this dynamic array list implementation of python
         self.A.append(Item(label, key))
         idx = len(self.A) - 1
+        # keep the dict with the vertex label and the index (position in the array)
         self.label2idx[self.A[idx].label] = idx
-        # insert at the bottom (max idx, last element of the array), so it has to heapify up
+        # insert at the bottom (max idx, last element of the array), so it has to heapify up this last item
+        # as necessary, using the recursion inside min_heapify_up implementation 
         self.min_heapify_up(idx)
 
     def extract_min(self):
@@ -73,14 +75,20 @@ class PriorityQueue:
         return min_label
 
     def decrease_key(self, label, key):
+        '''
+        label: node label
+        key: distance from the source vertex
+        '''
         # the part in which the cross linking will make the difference
         # to be able to access any vertex
-        if label in self.label2idx:
+        if label in self.label2idx: # O(1) hash
             # returning the distance
             idx = self.label2idx[label]
             # if new distance to the source vertex is less than current stored distance to source vertex, then update it 
             if key < self.A[idx].key:
                 self.A[idx].key = key
+                # we changed to a smaller distance, therefore this smaller distance may go up in the 
+                # Min Heap, that is why we use a min_heapify_up
                 self.min_heapify_up(idx)
 
 
