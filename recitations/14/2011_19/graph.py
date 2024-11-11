@@ -25,7 +25,14 @@ class Graph:
     
     def weight(self, u, v):
         return self.Adj[u][v]
-
+    
+    def add_edge(self, u, v, weight):
+        if u in self.Adj:
+            # adding or overwriting it
+            self.Adj[u][v] = weight
+        else:
+            self.Adj[u] = {}
+            self.Adj[u][v] = weight
 
 
         
@@ -39,6 +46,8 @@ if __name__ == '__main__':
         'E': {}
     }
     graph = Graph(Adj)
+    graph.add_edge('F','G',4)
+    breakpoint()
     print('iter vertices')
     [print(v) for v in graph.itervertices()]
     print('inverse neighbors')
