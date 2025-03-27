@@ -1,4 +1,4 @@
-
+# Insertion Sort algorithm
 
 A = [7,8,5,2,4,6,3]
 
@@ -6,21 +6,30 @@ A = [7,8,5,2,4,6,3]
 # then swap
 # algorithm go by swaping adjacent values
 
+# untill A[:i] is sorted
 # sorted
 #A[:i]
 
+# the remaining is still unsorted  
 # unsorted
 #A[i:]
 
+# count the number of swaps just for fun
 swaps = 0
+# consider the full length
+# O(n) passes
 for i in range(0, len(A) - 1):
-	
-	j = len(A) - 1
-	
-	while j > i:
+    
+    # know before hand where it should stop
+	j = i
+    
+    # stop when reached the final part of the array
+    # going from the start to the end
+    # O(n) passes
+    # while we still have not reached the limit of the array (inferior)
+    # and still have for two elements at this point, they are reversed, continue the swaps
+	while j > 0 and A[j-1] > A[j]:
 		print(A)
-		# if the last element is the smallest, it will keep moving till the beginning of the array 
-		# making the prefix as the subproblem which is sorted at the end of a single call in i
 		if A[j-1] > A[j]:
 			A[j-1], A[j] = A[j], A[j-1]
 			swaps +=1    
@@ -28,7 +37,7 @@ for i in range(0, len(A) - 1):
 		j -= 1
 	
 	print(f'Sorted subarray: {A[:i]}')
-	print(f'Unsorted subarray: {A[i:]}')
+	print(f'Unsorted subarray: {A[i:]}\n')
 
 print(swaps)
 

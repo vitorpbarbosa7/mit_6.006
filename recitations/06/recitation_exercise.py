@@ -17,6 +17,10 @@ class BNode:
             yield from A.right.subtree_iter()
 
     def __repr__(A):
+        # yields, return one at a time, to this function here
+        # lazy evaluation, we do not put all values at once in memory to process them 
+        # they come in order one at a time
+        # iterator over time really, it yields each one one at a time
         return ' -> '.join(str(node.item) for node in A.subtree_iter())
  
     def subtree_first(A):

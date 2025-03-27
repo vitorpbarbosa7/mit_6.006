@@ -43,7 +43,8 @@ class BinaryNode:
         # symetric idea from subtree_first
         if A.right:
             return A.right.subtree_last()
-        
+
+        # if it has no right node, so it is already the subtree last one        
         else:
             return A
         
