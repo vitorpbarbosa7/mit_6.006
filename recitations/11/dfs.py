@@ -3,19 +3,31 @@ def dfs(Adj, s, parent=None, order=None):
     Adj: Adjacency list (with weights)
     s: start vertex
     '''
+    # print(f'Stack frame created')
 
+    # Base case for root 
     if parent is None:
-        parent = {v: None for v in Adj}
+        parent = {vv: None for vv in Adj}
         parent[s] = s
         order = []
 
     # Iterate over each adjacent vertex and its weight
     for v in Adj[s]:
+        # print(f'Vertex: {v}')
+        # print(f'Parent: {s}')
+        # print(f'Parent dict: {parent}')
+
+
+        # c is the first one added, so c already has a parent and it was visited
+        # therefore it will not be visited again
         if parent[v] is None:
             parent[v] = s
             dfs(Adj, v, parent=parent, order=order)
 
+    # print('Will add now')
+    # print('Will add the last first, and so on')
     order.append(s)
+    # print(order)
 
     return parent, order
 
@@ -38,6 +50,6 @@ if __name__ == '__main__':
     parent, order = dfs(W, s)
 
     topological_order = order.reverse()
-    print(topological_order)
+    # print(topological_order)
     print(parent)
     print(order)

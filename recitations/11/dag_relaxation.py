@@ -7,11 +7,11 @@ def dag_relaxation(Adj, s):
     order.reverse()
     topological_order = order
     # initialize all initial estimates of distance as infinity 
-    d = {v: float('inf') for v in Adj}
+    distances = {v: float('inf') for v in Adj}
     # Initialize parent pointer for every vertex
     parent = {v: None for v in Adj}
     # Source vertex parent pointer is each self, s, and distance to itself is 0
-    d[s], parent[s] = 0, s
+    distances[s], parent[s] = 0, s
 
     # The topological sort order, got from Depth First Search, guarantees that
     # the relaxation, that is, trying to find the new best shortest path
@@ -20,20 +20,21 @@ def dag_relaxation(Adj, s):
         for v in Adj[u]:
 
             print(f'{u} : {Adj[u]}')
-            try_to_relax(Adj, d, parent, u, v, s)
+            try_to_relax(Adj, distances, parent, u, v, s)
     
-    return d, parent
+    return distances, parent
 
-def try_to_relax(Adj, d, parent, u, v, s):
+def try_to_relax(Adj, distances, parent, u, v, s):
 
     # trying to find new paths with less weight
 
-    old_d = d[v]
-    if d[v] > d[u] + w(Adj, u, v):
+    old_d = distances[v]
+    if distances[v] > distances[u] + w(Adj, u, v):
         print(f'\nNew path found, because')
-        print(f'{d[v]} > {d[u]} + {w(Adj, u, v)}')
-        d[v] = d[u] + w(Adj, u, v)
-        print(f'distance from {s} to {v} updated from {old_d} to {d[v]}')
+        print(f'{distances[v]} > {distances[u]} + {w(Adj, u, v)}')
+        distances[v] = distances[u] + w(Adj, u, v)
+        print(f'distance from {s} to {v} updated from {old_d} to {distances[v]}')
+        breakpoint()
 
         # update new parent pointer for v, which will come from u
         # since we found a new path 
@@ -57,7 +58,7 @@ if __name__ == '__main__':
     
     s = 'e'
     
-    d, parent = dag_relaxation(W, s)
+    distances, parent = dag_relaxation(W, s)
     
-    print(f'\nDistances from s to connected vertices:\n {d}')
+    print(f'\nDistances from s to connected vertices:\n {distances}')
     print(f'\n Parent pointers:\n {parent}')

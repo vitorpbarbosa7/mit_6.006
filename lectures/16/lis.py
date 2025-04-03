@@ -1,6 +1,6 @@
 
 A = 'CARBOHYDRATE'
-A = 'EFAGBCD'
+# A = 'EFAGBCD'
 
 n = len(A)
 def x(i):

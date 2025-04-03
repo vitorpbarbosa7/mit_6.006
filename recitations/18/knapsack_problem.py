@@ -18,10 +18,11 @@ def dp(i, s):
         return dp(i+1, s)
     
     # subproblems:
-    # follow for next item and keep the capacity
+    # guessing, brute forcing
+    # follow for next item and keep the capacity (do not take the item )
     not_take_current_item = 0 + dp(i+1, s)
 
-    # follow for next item and decrease capacity
+    # follow for next item and decrease capacity (take the item)
     take_current_item = A[i] + dp(i+1, s - S[i])
 
     local_max = max(not_take_current_item, take_current_item)

@@ -6,7 +6,10 @@ def merge_sort(A, a = 0, b = None):
 	
 	# a, b and c will change in each level
 	c = (a + b + 1)//2
-	
+
+	# this is the return condition to do not enter into a new level of recursion (create new stack frame)	
+	# if b - a is not greater than 1, therefore when calculating the middle, resulted in 0
+	print(f'Length condition: a: {a}, b: {b}--> b - a: {b-a}')
 	if b - a > 1:
 		# Divide --------------
 		# left node
@@ -30,7 +33,9 @@ def merge_sort(A, a = 0, b = None):
 	
 		# merge part with the temporary storage L and R
 		
-		# a pointer is the beginning of left
+		# a pointer is the beginning of left for each L and R
+		# because they are separated from A, this works 
+		# if not I would have to be together with relative incides on A 
 		i, j = 0, 0
 		
 		while a < b:
